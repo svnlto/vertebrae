@@ -26,7 +26,7 @@ function() {
   router = new Router();
   Backbone.history.start();
 
-  app.namespace.setItem('router', router);
+  app.namespace.set('router', router);
 
   return router;
 

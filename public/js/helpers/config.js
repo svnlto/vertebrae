@@ -16,7 +16,7 @@ define('helpers/config', [], function() {
     api : config.dataSource
   };
 
-  app.namespace.setItem('config', appConfig);
+  app.namespace.set('config', appConfig);
 
   return appConfig;
 

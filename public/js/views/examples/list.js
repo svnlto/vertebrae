@@ -28,7 +28,7 @@ function(ItemView) {
     }
   });
 
-  app.namespace.setItem('views.examples.list', View);
+  app.namespace.set('views.examples.list', View);
 
   return View;
 

@@ -17,7 +17,7 @@ function(Model) {
 
   });
 
-  app.namespace.setItem('collections.examples', Collection);
+  app.namespace.set('collections.examples', Collection);
   return Collection;
 
 });

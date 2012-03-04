@@ -4,26 +4,19 @@
 
 define('helpers/namespace', [], function() {
 
-  /*
-    TODO: wrap console.logs isDebug function that
-    can be activated from appConfig
-  */
-
   var app = window.app = window.app || {},
       namespace = {};
 
   app.namespace = namespace;
 
   // Sets object in namespace
-  namespace.setItem = function (nsString, object) {
+  namespace.set = function (nsString, object) {
     var parts = [],
         parent = app,
         i;
 
     if (typeof nsString !== 'string') return;
-    parts = nsString.replace( /\//g,'.').split('.'),
-
-    console.log('setting namespace item "%s"', nsString);
+    parts = nsString.replace( /\//g,'.').split('.');
 
     if (parts[0] === "app") {
       parts = parts.slice(1);
@@ -40,16 +33,13 @@ define('helpers/namespace', [], function() {
 
 
   // Gets object from namespace
-  namespace.getItem = function (nsString) {
+  namespace.get = function (nsString) {
     var parts = [],
         parent = app,
         i;
 
     if (typeof nsString !== 'string') return;
-
     parts = nsString.replace( /\//g,'.').split('.');
-
-    console.log('GET namespace', nsString);
 
     for (i = 0, len = parts.length; i < len; i += 1) {
       if (!parent) return;
@@ -61,7 +51,7 @@ define('helpers/namespace', [], function() {
 
 
   // Remove object from namespace
-  namespace.removeItem = function (nsString) {
+  namespace.del = function (nsString) {
     var nsArr = nsString.split('.'),
         parent,
         child = window.app;
@@ -74,7 +64,7 @@ define('helpers/namespace', [], function() {
         delete parent[nsArr[i]];
       }
     };
-  }
+  };
 
   return namespace;
 

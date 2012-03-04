@@ -7,7 +7,9 @@ function() {
 
   var utils = {};
 
-  app.namespace.setItem('utils', utils);
+//  _.extend(app.namespace, Backbone.Events);
+
+  app.namespace.set('utils', utils);
 
   return utils;
 

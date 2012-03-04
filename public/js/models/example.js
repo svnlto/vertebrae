@@ -10,7 +10,7 @@ define('models/example', [], function() {
     }
   });
 
-  app.namespace.setItem('models.example', Model);
+  app.namespace.set('models.example', Model);
 
   return Model;
 

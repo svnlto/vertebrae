@@ -35,7 +35,7 @@ function(Model, Collection, Handlebars, template, DetailView) {
     }
   });
 
-  app.namespace.setItem('views.examples.item', View);
+  app.namespace.set('views.examples.item', View);
 
   return View;
 
