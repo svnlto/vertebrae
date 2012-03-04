@@ -5,9 +5,7 @@
 define('models/example', [], function() {
 
   var Model = Backbone.Model.extend({
-    url: function() {
-      return app.config.api + 'examples/' + this._id ;
-    }
+    urlRoot : '/examples'
   });
 
   app.namespace.set('models.example', Model);
