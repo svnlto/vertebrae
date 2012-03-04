@@ -1,10 +1,12 @@
 # vertebrae #
 
-Boilerplate for a Backbone.js, Require.js app.
+Yet another Backbone Boilerplate take makes use of the following technologies.
 
-### Folders ###
-
-
-### Todo ###
-
+* jquery
+* underscore
+* backbone
+* require.js
+* wrap.js
+* handlebars
+* node.js
 
