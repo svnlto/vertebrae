@@ -1,6 +1,6 @@
 # vertebrae #
 
-Yet another Backbone Boilerplate take makes use of the following technologies.
+Yet another Backbone Boilerplate that makes use of the following technologies.
 
 * jquery
 * underscore
