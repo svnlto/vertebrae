@@ -4,13 +4,11 @@
 
 define('views/examples/item', [
   'models/example',
-  'collections/examples',
   'wrap!handlebars',
-  'text!templates/examples/list.html',
-  'views/examples/detail'
+  'text!templates/examples/list.html'
 ],
 
-function(Model, Collection, Handlebars, template, DetailView) {
+function(Model, Handlebars, template) {
 
   var View = Backbone.View.extend({
 
@@ -21,10 +19,8 @@ function(Model, Collection, Handlebars, template, DetailView) {
     },
 
     clicked: function(e) {
-      var detailView = new DetailView({
-        data: this.model.toJSON()
-      });
-      detailView.render();
+      // console.log('demo on how to get a refence to the current model:');
+      // console.log(this.model);
     },
 
     render: function() {

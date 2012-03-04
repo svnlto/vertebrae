@@ -3,26 +3,44 @@
 //
 
 define('views/examples/main', [
-  'views/examples/list',
+  'models/example',
   'collections/examples'
 ],
 
-function(listView, Collection) {
+function(Example, Collection) {
 
-  //
-  // create new collection, fetch data and
-  // pass the returned data as a new Backbone.Collection
-  // to the view.
-  //
-  var collection = new Collection();
-  collection.fetch().success(function(data) {
+  return {
 
-    var view = new listView({
-      collection: new Backbone.Collection(data)
-    });
+    exampleById: function(id) {
+      var example = new Example();
+      example.id = id;
+      example.fetch({
+        success: function(model, resp) {
+          require(['views/examples/detail'],function(DetailView) {
+            var detailView = new DetailView({
+              data: resp
+            });
+            detailView.render();
+          });
+        }
+      });
+    },
 
-    view.render();
-    $("#list").append(view.el);
-  });
+    exampleList: function() {
+      var collection = new Collection();
+      collection.fetch({
+        success: function(collection, resp) {
+          require(['views/examples/list'], function(ListView) {
+            var view = new ListView({
+              collection: new Backbone.Collection(resp)
+            });
+            view.render();
+            $("#list").html(view.el);
+          });
+        }
+      });
+    }
+
+  };
 
 });

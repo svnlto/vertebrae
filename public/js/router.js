@@ -10,15 +10,21 @@ function() {
   Router = Backbone.Router.extend({
 
     routes: {
+      'examples/:id'     : 'exampleById',
       '*default'         : 'examples'
     },
 
     examples: function() {
-      require(['views/examples/main'], function() {});
+      require(['views/examples/main'], function(view) {
+        view.exampleList();
+      });
     },
 
-    example: function(id) {
-      require(['views/examples/main'], function(id) {});
+    exampleById: function(id) {
+      require(['views/examples/main'], function(view) {
+        view.exampleList();
+        view.exampleById(id);
+      });
     }
 
   });
