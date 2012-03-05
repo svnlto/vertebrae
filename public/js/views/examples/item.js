@@ -19,8 +19,6 @@ function(Model, Handlebars, template) {
     },
 
     clicked: function(e) {
-      // console.log('demo on how to get a refence to the current model:');
-      // console.log(this.model);
     },
 
     render: function() {

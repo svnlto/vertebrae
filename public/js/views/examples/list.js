@@ -33,4 +33,3 @@ function(ItemView) {
   return View;
 
 });
-

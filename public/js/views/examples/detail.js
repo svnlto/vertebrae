@@ -25,4 +25,3 @@ function(template, Handlebars) {
   return View;
 
 });
-
