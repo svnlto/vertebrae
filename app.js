@@ -64,7 +64,7 @@ app.get('/examples/:id', function(req, res, next) {
   data = JSON.parse(fs.readFileSync(DATA_DIR + '/examples.json', 'utf8'));
 
   for (var i=0; i < data.length; i++) {
-    if (data[i].id === req.params['id']) {
+    if (data[i].id == req.params.id) {
       payload = data[i];
     }
   }
