@@ -12,15 +12,6 @@ require.config({
     backbone:      'libs/backbone/backbone'
   },
   wrapJS: {
-    "underscore": {
-      attach: "_",
-      path: 'underscore'
-    },
-    "backbone": {
-      attach: "Backbone",
-      deps: ['underscore'],
-      path: 'backbone'
-    },
     "handlebars": {
       attach: function() {
         var Handlebars = window.Handlebars;
@@ -32,18 +23,15 @@ require.config({
   },
   priority: [
     'jquery',
-    'helpers/namespace'
+    'underscore',
+    'backbone'
   ]
 });
 
 require([
-  'wrap!underscore',
-  'wrap!backbone',
-], function($, _, Backbone) {
-  require([
-    'helpers/config',
-    'helpers/utils',
-    'order!helpers/handlebars',
-    'router'
-  ], function() {});
-});
+  'helpers/namespace',
+  'helpers/config',
+  'helpers/utils',
+  'order!helpers/handlebars',
+  'router'
+], function() {});
