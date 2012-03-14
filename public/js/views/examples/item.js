@@ -4,7 +4,7 @@
 
 define('views/examples/item', [
   'models/example',
-  'wrap!handlebars',
+  'handlebars',
   'text!templates/examples/list.html'
 ],
 

@@ -4,7 +4,7 @@
 
 define('views/examples/detail', [
   'text!templates/examples/detail.html',
-  'wrap!handlebars'
+  'handlebars'
 ],
 
 function(template, Handlebars) {

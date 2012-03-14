@@ -3,7 +3,7 @@
 //
 
 define('helpers/handlebars', [
-  'wrap!handlebars'
+  'handlebars'
 ],
 
 function(Handlebars) {
