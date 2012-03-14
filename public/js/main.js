@@ -3,10 +3,12 @@
 //
 
 require.config({
+  basePath:        'js/',
+  deps:            ['main'],
   paths: {
     text:          'libs/require/text',
     order:         'libs/require/order',
-    jquery:        'libs/jquery/jquery-min',
+    jquery:        'libs/jquery/jquery',
     underscore:    'libs/underscore/underscore',
     backbone:      'libs/backbone/backbone',
     handlebars:    'libs/handlebars/handlebars'
@@ -14,7 +16,8 @@ require.config({
   priority: [
     'jquery',
     'underscore',
-    'backbone'
+    'backbone',
+    'handlebars'
   ]
 });
 
@@ -22,6 +25,6 @@ require([
   'helpers/namespace',
   'helpers/config',
   'helpers/utils',
-  'order!helpers/handlebars',
+  'helpers/handlebars',
   'router'
 ], function() {});
