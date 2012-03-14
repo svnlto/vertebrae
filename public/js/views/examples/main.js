@@ -16,7 +16,7 @@ function(Example, Collection) {
       example.id = id;
       example.fetch({
         success: function(model, resp) {
-          require(['views/examples/detail'],function(DetailView) {
+          require(['views/examples/detail'], function(DetailView) {
             var detailView = new DetailView({
               data: resp
             });

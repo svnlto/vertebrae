@@ -27,4 +27,4 @@ require([
   'helpers/utils',
   'helpers/handlebars',
   'router'
-], function() {});
+]);
