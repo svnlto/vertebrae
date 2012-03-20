@@ -22,9 +22,9 @@ require.config({
 });
 
 require([
-  'helpers/namespace',
-  'helpers/config',
-  'helpers/utils',
-  'helpers/handlebars',
-  'router'
+  'order!helpers/namespace',
+  'order!helpers/config',
+  'order!helpers/utils',
+  'order!helpers/handlebars',
+  'order!router'
 ]);
