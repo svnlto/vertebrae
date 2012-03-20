@@ -7,12 +7,12 @@ define('views/examples/main', [
   'collections/examples'
 ],
 
-function(Example, Collection) {
+function(Model, Collection) {
 
   return {
 
     exampleById: function(id) {
-      var example = new Example();
+      var example = new Model();
       example.id = id;
       example.fetch({
         success: function(model, resp) {
