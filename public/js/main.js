@@ -11,12 +11,14 @@ require.config({
     jquery:        'libs/jquery/jquery',
     underscore:    'libs/underscore/underscore',
     backbone:      'libs/backbone/backbone',
+    memory:      'libs/backbone/backbone-memory',
     handlebars:    'libs/handlebars/handlebars'
   },
   priority: [
     'jquery',
     'underscore',
     'backbone',
+    'memory',
     'handlebars'
   ]
 });
