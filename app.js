@@ -6,6 +6,8 @@
  npm install
 */
 
+"use strict";
+
 var DATA_DIR = __dirname + "/data",
     app,
     setHeaders,
@@ -23,7 +25,8 @@ setHeaders = function(req, res, next) {
 };
 
 
-app.configure(function(){
+app.configure(function() {
+
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.set("view options", {layout: false});
@@ -64,7 +67,7 @@ app.get('/examples/:id', function(req, res, next) {
   data = JSON.parse(fs.readFileSync(DATA_DIR + '/examples.json', 'utf8'));
 
   for (var i=0; i < data.length; i++) {
-    if (data[i].id == req.params.id) {
+    if (data[i].id === req.params.id) {
       payload = data[i];
     }
   }

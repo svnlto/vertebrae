@@ -4,7 +4,9 @@
 
 define('helpers/config', [], function() {
 
-  config = {
+  "use strict";
+
+  var config = {
     "name": "vertebrae",
     "version": "0.0.0",
     "dataSource": "http://localhost:8000/"

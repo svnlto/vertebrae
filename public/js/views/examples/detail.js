@@ -9,6 +9,8 @@ define('views/examples/detail', [
 
 function(template, Handlebars) {
 
+  "use strict";
+
   var View = Backbone.View.extend({
     el: '#detail',
 

@@ -5,6 +5,8 @@ define('helpers/utils', [],
 
 function() {
 
+  "use strict";
+
   var utils = {};
 
 //  _.extend(app.namespace, Backbone.Events);

@@ -4,6 +4,8 @@
 
 define('models/example', [], function() {
 
+  "use strict";
+
   var Model = Backbone.Model.extend({
     urlRoot : '/examples'
   });

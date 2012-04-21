@@ -10,6 +10,8 @@ define('views/examples/item', [
 
 function(Model, Handlebars, template) {
 
+  "use strict";
+
   var View = Backbone.View.extend({
 
     tagName: "li",

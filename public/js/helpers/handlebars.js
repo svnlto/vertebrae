@@ -8,6 +8,8 @@ define('helpers/handlebars', [
 
 function(Handlebars) {
 
+  "use strict";
+
   //
   // place {{ debug }}
   //
@@ -20,7 +22,7 @@ function(Handlebars) {
       console.log("Value");
       console.log("====================");
       console.log(optionalValue);
-    };
+    }
   });
 
 });

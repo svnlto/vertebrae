@@ -4,6 +4,8 @@
 
 define('helpers/namespace', [], function() {
 
+  "use strict";
+
   var app = window.app = window.app || {},
       namespace = {};
 
@@ -13,9 +15,13 @@ define('helpers/namespace', [], function() {
   namespace.set = function (nsString, object) {
     var parts = [],
         parent = app,
+        len,
         i;
 
-    if (typeof nsString !== 'string') return;
+    if (typeof nsString !== 'string') {
+      return;
+    }
+
     parts = nsString.replace( /\//g,'.').split('.');
 
     if (parts[0] === "app") {
@@ -35,14 +41,20 @@ define('helpers/namespace', [], function() {
   // Gets object from namespace
   namespace.get = function (nsString) {
     var parts = [],
+        len,
         parent = app,
         i;
 
-    if (typeof nsString !== 'string') return;
+    if (typeof nsString !== 'string') {
+      return;
+    }
     parts = nsString.replace( /\//g,'.').split('.');
 
     for (i = 0, len = parts.length; i < len; i += 1) {
-      if (!parent) return;
+      if (!parent) {
+        return;
+      }
+
       parent = parent[parts[i]];
     }
 
@@ -63,7 +75,7 @@ define('helpers/namespace', [], function() {
       if (i === len - 1) {
         delete parent[nsArr[i]];
       }
-    };
+    }
   };
 
   return namespace;

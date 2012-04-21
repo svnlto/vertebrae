@@ -9,6 +9,8 @@ define('views/examples/main', [
 
 function(Model, Collection) {
 
+  "use strict";
+
   return {
 
     exampleById: function(id) {

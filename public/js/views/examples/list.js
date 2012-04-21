@@ -8,6 +8,8 @@ define('views/examples/list', [
 
 function(ItemView) {
 
+  "use strict";
+
   var View = Backbone.View.extend({
 
     tagName: "ul",

@@ -8,6 +8,8 @@ define('collections/examples', [
 
 function(Model) {
 
+  "use strict";
+
   var Collection = Backbone.Collection.extend({
     model: Model,
 

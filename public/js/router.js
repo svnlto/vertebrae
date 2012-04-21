@@ -5,6 +5,8 @@ define('router', [],
 
 function() {
 
+  "use strict";
+
   var router, Router;
 
   Router = Backbone.Router.extend({
