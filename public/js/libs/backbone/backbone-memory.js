@@ -7,19 +7,20 @@
 (function (factory) {
 
   if ( typeof define === 'function' && define.amd) {
-    //AMD
     define(['backbone'], factory);
   } else {
-    // CommonJS
     factory(this.Backbone);
   }
+
 }(function(Backbone) {
 
   Backbone.sync = (function(original) {
 
     return function(method, model, options) {
-      Backbone._cache = Backbone._cache || {};
       var key = options.url || _.isFunction(model.url) ? model.url() : model.url;
+      
+      Backbone._cache = Backbone._cache || {};
+
       if (method === 'read') {
         if (Backbone._cache[key]) {
           return options.success.call(this, Backbone._cache[key]);
