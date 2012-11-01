@@ -1,0 +1,40 @@
+{{! templates/detail }}
+
+
+{{debug data}}
+<div id="asset" class="unstyled">
+
+  {{#if data.poster}}
+    <div>
+      <video id="video" width="860", height="484", poster="{{data.poster}}", preload="none" class="sublime">
+      {{#each data.full}}
+        <source src="{{this.src}}"/>
+      {{/each}}
+      </video>
+    </div>
+  {{else}}
+    <div id="featured" class="carousel slide">
+      <div class="carousel-inner">
+        {{#each data.full}}
+          <div class="item">
+            <img src="{{this}}" alt="{{../data.title}}"data-id="{{../data._id}}">
+          </div>
+        {{/each}}
+      </div>
+
+      {{#compare  data.full.length 1 operator=">"}}
+        <a class="carousel-control left" href="#featured" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#featured" data-slide="next">&rsaquo;</a>
+      {{/compare}}
+
+      {{#compare  collection.length 1 operator=">"}}
+        <a class="carousel-control left" href="#featured" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#featured" data-slide="next">&rsaquo;</a>
+      {{/compare}}
+
+
+
+    </div>
+  {{/if}}
+
+</div>
