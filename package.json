@@ -14,14 +14,11 @@
     "mocha": "~1.3.2",
     "requirejs": "2.0.x",
     "grunt-contrib-copy": "~0.2.0",
-    "grunt-testem": "~0.1.3",
-    "grunt": "0.3.x",
-    "grunt-less": "0.1.x",
     "grunt-requirejs": "~0.2.9"
   },
   "scripts": {
     "start": "node bin/server",
     "dev": "node bin/dev",
-    "test": "grunt travis --verbose"
+    "build": "grunt build --verbose"
   }
 }

@@ -3,13 +3,8 @@ module.exports = function(grunt) {
 
   "use strict";
 
-  grunt.loadNpmTasks('grunt-less');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
-  // Load up local tasks
-  grunt.loadTasks('build/tasks/');
-  grunt.loadTasks('build/helpers/');
 
   // Project configuration.
   grunt.initConfig({
@@ -24,13 +19,14 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['<config:lint.files>', 'assets/css/app/*.less'],
-      tasks: 'lint less'
+      tasks: 'lint'
     },
 
     copy: {
       dist: {
         files: {
-          'prod/assets/img/': 'assets/img/**'
+          'prod/app/index.html': 'app/index.html',
+          'prod/assets/css/': 'assets/css/**'
         }
       }
     },
@@ -110,17 +106,6 @@ module.exports = function(grunt) {
 
     },
 
-    less: {
-      all: {
-        src: 'assets/css/app/app.less',
-        dest: 'assets/css/app/app.css',
-        options: {
-          compress: false,
-          yuicompress: false
-        }
-      }
-    },
-
     requirejs: {
       js: {
         almond: true,
@@ -161,28 +146,11 @@ module.exports = function(grunt) {
         },
         out: "prod/app/main.js",
         name: "main"
-      },
-      css: {
-       cssIn: 'assets/css/app/app.css',
-       out: 'prod/assets/css/app/app.css',
-       optimizeCss: 'default'
-      }
-    },
-
-    cache_bust: {
-      dist: {
-        files: [
-          'app/index.html',
-          'prod/app/main.js',
-          'assets/css/app/app.css'
-        ]
       }
     }
 
   });
   // Default task.
-  grunt.registerTask('default', 'lint');
-  // Travis CI task.
-  grunt.registerTask('travis', 'lint requirejs:js requirejs:css copy cache_bust');
+  grunt.registerTask('build', 'lint copy requirejs:js');
 
 };

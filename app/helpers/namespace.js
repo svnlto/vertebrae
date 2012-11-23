@@ -3,15 +3,13 @@
 //
 
 define([
-  'helpers/events/broker'
+  'backbone'
 ],
 
-function (eventBroker) {
+function (Backbone) {
 
   "use strict";
 
-  // namespace is the first module loaded but the console checker
-  // is not run until we load logger module so we have to check manually.
   var con = window.console;
 
   // Sets object in namespace
@@ -23,17 +21,12 @@ function (eventBroker) {
       nsString = 'app.' + nsString;
     }
 
-    //if (con && con.log) {
-      //console.log('NAMESPACE set "%s"', nsString);
-    //}
-
     if (typeof nsString !== 'string') {
       return;
     }
 
     parts = nsString.replace( /\//g,'.').split('.');
 
-      // remove object if it already exists
     if (!!getItem(nsString)) {
       removeItem(nsString);
     }
@@ -61,10 +54,6 @@ function (eventBroker) {
     if (nsString.indexOf('app.') === -1) {
       nsString = 'app.' + nsString;
     }
-
-    //if (con && con.log) {
-      //console.log('NAMESPACE get "%s"', nsString);
-    //}
 
     parts = nsString.replace( /\//g,'.').split('.');
 
@@ -116,8 +105,7 @@ function (eventBroker) {
   };
 
   // bind the backbone events module to our app object
-  //_.extend(global.app, Backbone.Events);
-  eventBroker(global.app);
+  _.extend(global.app, Backbone.Events);
 
   return global.app;
 

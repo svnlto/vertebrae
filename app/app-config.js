@@ -10,11 +10,6 @@ function (app) {
 
   "use strict";
 
-  //
-  // we're extending backbone model so we can use the getters to access
-  // the application's properties. We can also see if the app is trying
-  // to access a property which doesn't exist.
-  //
   var Config = Backbone.Model.extend({
     get : function () {
       var args = _.toArray(arguments),
@@ -36,7 +31,7 @@ function (app) {
   //
   var application = new Config({
     name             : "vertebrae",
-    apiUrl           : 'http://localhost:8000/api/',
+    apiUrl           : 'http://localhost:4444/api/',
     APP_HOST         : appHost,
     AJAX_TIMEOUT     : 5000,
     AJAX_CACHE       : true
