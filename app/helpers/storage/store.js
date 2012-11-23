@@ -17,9 +17,11 @@ function (app) {
   });
 
   $('body').ajaxStart(function() {
+    app.get('ajax').trigger('start');
   });
 
   $('body').ajaxStop(function() {
+    app.get('ajax').trigger('stop');
   });
 
 });
