@@ -4,18 +4,17 @@
 
 define([
   'collections/base',
-  'tests/app/stubs/example'
 ],
 
-function(Collection, fixture) {
+function(Collection) {
 
   'use strict';
 
-  describe("Examples collection", function() {
+  describe("Base collection", function() {
 
     beforeEach(function() {
       this.server = sinon.fakeServer.create();
-      this.server.respondWith('GET', '/examples', [200, {'Content-Type': 'application-json'}, JSON.stringify(fixture)]);
+      this.server.respondWith('GET', '/examples', [200, {'Content-Type': 'application-json'}, '{}']);
       this.server.respond();
       this.server.autoRespond = true;
 

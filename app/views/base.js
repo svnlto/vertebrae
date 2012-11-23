@@ -12,6 +12,14 @@ function(Handlebars) {
 
   var SuperView = Backbone.SuperView = Backbone.View.extend({
 
+    // ### ìnitialze
+    //
+    // this will call render as soon as we create an instance of our view.
+    //
+    initialize:  function() {
+      this.render();
+    },
+
     template: '<div></div>',
 
     // ### `templatize`
@@ -55,7 +63,9 @@ function(Handlebars) {
       var tpl = this.templatize(),
           data = this.serialize();
 
-      this.$el.html(tpl(data));
+      this.$el.html(Handlebars.compile(tpl)({
+        data: data
+      }));
 
       this.postRender();
 
@@ -72,7 +82,9 @@ function(Handlebars) {
     // `postRender` fires just before the view's `render` method returns. Do
     // things here that require the view's basic markup to be in place, but
     // that do NOT require the view to be placed in the document
-    postRender : function() { }
+    postRender : function() {
+      return this;
+    }
 
   });
 
