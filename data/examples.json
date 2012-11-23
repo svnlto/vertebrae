@@ -1,0 +1,14 @@
+[
+  {
+    "id"      : 1,
+    "name"    : "Example Item One",
+    "categories": ["category1", "category2"],
+    "tags"    : ["tag1", "tag2"]
+  },
+  {
+    "id"      : 2,
+    "name"    : "Example Item Two",
+    "categories": ["category3", "category4"],
+    "tags"    : ["tag3", "tag4"]
+  }
+]
