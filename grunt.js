@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-testem');
 
   // Project configuration.
   grunt.initConfig({
@@ -29,6 +30,15 @@ module.exports = function(grunt) {
           'prod/assets/css/': 'assets/css/**'
         }
       }
+    },
+
+    testem : {
+      browsers : [
+        'phantomjs'
+      ],
+      files : [
+        'tests/app/runner.html'
+      ]
     },
 
     jshint: {

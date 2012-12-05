@@ -1,0 +1,6 @@
+testrunner: mocha
+test_page: tests/app/runner.html
+launch_in_dev:
+    - PhantomJs
+launch_in_ci:
+    - PhantomJs
