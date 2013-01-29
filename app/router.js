@@ -14,7 +14,13 @@ function(app) {
 
   Router = Backbone.Router.extend({
 
-    routes: {},
+    routes: {
+      '*default' :  'index'
+    },
+    
+    index: function() {
+      console.log('default route');
+    }
 
   });
 
