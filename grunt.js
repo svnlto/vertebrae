@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-testem');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Project configuration.
   grunt.initConfig({
@@ -35,17 +35,14 @@ module.exports = function(grunt) {
       }
     },
 
-    testem : {
-      browsers : [
-        'phantomjs'
-      ],
-      files : [
-        'tests/app/runner.html'
-      ]
     jshint: {
       options: jshintOptions
     },
 
+    shell: {
+      test: {
+        command: 'node node_modules/testem/testem.js ci',
+        stdout: true
       }
     },
 
@@ -57,6 +54,7 @@ module.exports = function(grunt) {
           module: 'main',
           modulePath: 'prod/app/main'
         }],
+        insertRequire: ['main'],
         baseUrl: "app/",
         optimizeCss: "none",
         optimize: "uglify",
