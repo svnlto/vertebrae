@@ -31,7 +31,7 @@ require([
   'backbone',
   'chai',
   'sinon'
-], function (Backbone, _, jquery, chai, sinon) {
+], function (jquery, _, Backbone, chai, sinon) {
 
   'use strict';
 
@@ -45,7 +45,7 @@ require([
   require([
     'tests/app/models/base',
     'tests/app/collections/base',
-    'tests/app/views/base',
+    'tests/app/views/base'
   ], function () {
     window.mocha.run();
   });
