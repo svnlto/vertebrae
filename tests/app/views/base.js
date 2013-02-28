@@ -37,7 +37,7 @@ function(BaseView, app) {
     });
 
     afterEach(function() {
-      view.destroy();
+      view.remove();
     });
 
     it("should have a 'el' of 'div'", function() {
