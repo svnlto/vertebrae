@@ -92,6 +92,7 @@ module.exports = function(grunt) {
 
   });
   // Default task.
+  grunt.registerTask('test', 'lint shell:test');
   grunt.registerTask('build', 'lint copy requirejs:js');
 
 };

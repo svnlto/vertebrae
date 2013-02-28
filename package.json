@@ -22,6 +22,7 @@
   "scripts": {
     "start": "node bin/server",
     "dev": "node bin/dev",
-    "build": "grunt build --verbose"
+    "build": "grunt build --verbose",
+    "test": "grunt test --verbose"
   }
 }
