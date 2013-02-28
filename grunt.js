@@ -1,4 +1,7 @@
 /*global module:false*/
+var fs = require('fs'),
+    jshintOptions = JSON.parse(fs.readFileSync('./.jshintrc'));
+
 module.exports = function(grunt) {
 
   "use strict";
@@ -39,81 +42,11 @@ module.exports = function(grunt) {
       files : [
         'tests/app/runner.html'
       ]
+    jshint: {
+      options: jshintOptions
     },
 
-    jshint: {
-      globals: {
-        "Backbone": true,
-        "_": true,
-        "$": true,
-        "moment": true,
-        "document": true,
-        "setTimeout": true,
-        "sinon": true,
-        "Handlebars": true,
-        "app": true,
-        "define": true,
-        "require": true,
-        "jasmine": true,
-        "spyOn": true,
-        "afterEach": true,
-        "it": true,
-        "xit": true,
-        "describe": true,
-        "xdescribe": true,
-        "expect": true,
-        "beforeEach": true,
-        "waits": true,
-        "waitsFor": true,
-        "runs": true,
-        "window" : true,
-        "browser": true,
-        "node": true,
-        "dojo": false,
-        "jquery": true,
-        "devel": true,
-        "console": true
-      },
-      options: {
-        "passfail": false,
-        "maxerr": 200,
-        "debug": false,
-        "devel": false,
-        "es5": true,
-        "strict": true,
-        "globalstrict": false,
-        "asi": false,
-        "laxbreak": false,
-        "bitwise": true,
-        "boss": false,
-        "curly": true,
-        "eqeqeq": true,
-        "eqnull": false,
-        "evil": false,
-        "expr": false,
-        "forin": true,
-        "immed": true,
-        "latedef": true,
-        "loopfunc": false,
-        "noarg": true,
-        "regexp": false,
-        "regexdash": false,
-        "scripturl": false,
-        "shadow": false,
-        "supernew": false,
-        "undef": true,
-        "newcap": true,
-        "noempty": true,
-        "nonew": false,
-        "nomen": false,
-        "onevar": false,
-        "plusplus": false,
-        "sub": false,
-        "trailing": true,
-        "white": false,
-        "multistr": true
       }
-
     },
 
     requirejs: {
