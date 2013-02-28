@@ -9,6 +9,11 @@ Also let me know if you find anything that bugs you or maybe something
 that could be added.
 
 
+### prerequisites
+
+the readme assumes that you have NPM and Bower installed.
+
+
 __Also, thanks to [@rmurphey](https://github.com/rmurphey) for the inspiration on getting this
 project up on github.__
 
@@ -27,9 +32,9 @@ project up on github.__
 
 ## Usage ##
 
-Run the following command from within the project directory
+Run the following commands from within the project directory
 
-`npm install`
+`npm install` `bower install`
 
 start node service
 
