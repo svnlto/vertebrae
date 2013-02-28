@@ -1,20 +1,9 @@
 require.config({
   paths: {
-    'jquery':               '/lib/jquery/jquery-min',
-    'backbone':             '/lib/backbone/backbone-0.9.2',
-    'underscore':           '/lib/lodash/lodash-0.4.1',
     'chai':                 '/tests/lib/chai',
     'sinon':                '/tests/lib/sinon'
   },
   shim: {
-    'underscore': {
-      deps: [],
-      exports: '_'
-    },
-    'backbone': {
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
-    },
     'chai': {
       exports: 'expect'
     },

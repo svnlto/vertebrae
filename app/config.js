@@ -4,17 +4,22 @@ require.config({
     lib:           '../lib/',
     tests:         '../tests',
     app:           '.',
-    text:          '/lib/require/text',
-    jquery:        '/lib/jquery/jquery-min',
+    text:          '/lib/require-text/text',
+    jquery:        '/lib/jquery/jquery',
     handlebars:    '/lib/handlebars/handlebars',
-    underscore:    '/lib/lodash/lodash-0.4.1',
-    backbone:      '/lib/backbone/backbone-0.9.2'
+    underscore:    '/lib/lodash/lodash',
+    backbone:      '/lib/backbone/backbone'
   },
 
   shim: {
     'underscore': {
-      attach: '_'
+      exports: '_'
     },
+
+    'handlebars': {
+      exports: 'Handlebars'
+    },
+
     'backbone': {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
