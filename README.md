@@ -3,7 +3,7 @@
 __yet another Backbone.Marionette Boilerplate__
 
 this is the sort of app structure I would usually start off a Backbone
-based project. Have a look, there are base views, tests etc.
+based project.
 
 Also let me know if you find anything that bugs you or maybe something
 that could be added.
