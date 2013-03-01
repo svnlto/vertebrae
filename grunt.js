@@ -68,21 +68,28 @@ module.exports = function(grunt) {
         findNestedDependencies: true,
         optimizeAllPluginResources: true,
         paths: {
-          lib:           '../lib/',
           app:           '.',
-          text:          '../lib/require/text',
-          jquery:        '../lib/jquery/jquery-min',
+          text:          '../lib/require-text/text',
+          hbs:           '../lib/backbone.marionette.hbs/backbone.marionette.hbs',
+          jquery:        '../lib/jquery/jquery',
           handlebars:    '../lib/handlebars/handlebars',
-          underscore:    '../lib/lodash/lodash-0.4.1',
-          backbone:      '../lib/backbone/backbone-0.9.2'
+          lodash:        '../lib/lodash/lodash',
+          backbone:      '../lib/backbone/backbone',
+          marionette:    '../lib/backbone.marionette/lib/backbone.marionette'
         },
         shim: {
-          'underscore': {
-            attach: '_'
-          },
           'backbone': {
-            deps: ['underscore', 'jquery'],
+            deps: ['lodash', 'jquery'],
             exports: 'Backbone'
+          },
+
+          'marionette': {
+            deps: ['backbone'],
+            exports: 'Backbone.Marionette'
+          },
+
+          'handlebars': {
+            exports: 'Handlebars'
           }
         },
         out: "prod/app/main.js",
