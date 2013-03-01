@@ -9,7 +9,7 @@ Also let me know if you find anything that bugs you or maybe something
 that could be added.
 
 
-### prerequisites
+### Prerequisites
 
 the readme assumes that you have NPM and Bower installed.
 
