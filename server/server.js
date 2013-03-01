@@ -2,7 +2,7 @@ var express   = require('express'),
     fs        = require('fs'),
     _         = require('underscore'),
 
-    site      = express.createServer(),
+    site      = express(),
     staticDir = express['static'];
 
 module.exports = function(opts) {
