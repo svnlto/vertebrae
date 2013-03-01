@@ -1,5 +1,5 @@
 //
-// ## models.base
+// ## entities.base.model
 //
 
 define(function() {
@@ -7,7 +7,7 @@ define(function() {
   "use strict";
 
   var SuperModel = Backbone.SuperModel = Backbone.Model.extend({
-    idAttribute: '_id'
+    idAttribute: 'id'
   });
 
   return SuperModel;
