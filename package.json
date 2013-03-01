@@ -15,7 +15,7 @@
     "requirejs": "2.0.x",
     "grunt-contrib-copy": "~0.2.0",
     "grunt-requirejs": "~0.2.9",
-    "testem": "0.2.68",
+    "testem": "0.2.70",
     "grunt": "0.3.17",
     "grunt-shell": "0.1.4"
   },
