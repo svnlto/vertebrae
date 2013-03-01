@@ -1,6 +1,6 @@
 # vertebrae
 
-__yet another Backbone.js Boilerplate__
+__yet another Backbone.Marionette Boilerplate__
 
 this is the sort of app structure I would usually start off a Backbone
 based project. Have a look, there are base views, tests etc.
