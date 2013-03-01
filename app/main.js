@@ -3,9 +3,14 @@
 //
 
 require([
-  'backbone',
-  'app-config',
-  'helpers/utils',
-  'helpers/handlebars',
+  'helpers/namespace',
   'router'
-]);
+],
+
+function(app, router) {
+
+  'use strict';
+
+  app.start();
+
+});

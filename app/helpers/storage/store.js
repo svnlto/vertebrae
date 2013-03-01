@@ -4,7 +4,7 @@
 
 define([
   'helpers/namespace',
-  'app-config'
+  'entities/config'
 ],
 
 function (app) {
@@ -12,16 +12,16 @@ function (app) {
   "use strict";
 
   $.ajaxSetup({
-    cache : app.config.get('app').get('AJAX_CACHE'),
-    timeout: app.config.get('app').get('AJAX_TIMEOUT')
+    cache : app.request('entities:config').get('ajaxCache'),
+    timeout: app.request('entities:config').get('ajaxCache')
   });
 
   $('body').ajaxStart(function() {
-    app.get('ajax').trigger('start');
+    app.vent.trigger('ajax:start');
   });
 
   $('body').ajaxStop(function() {
-    app.get('ajax').trigger('stop');
+    app.vent.trigger('ajax:stop');
   });
 
 });

@@ -3,33 +3,40 @@
 //
 
 define([
-  'helpers/namespace'
+  'helpers/namespace',
+  'marionette'
 ],
 
-function(app) {
+function(app, Marionette) {
 
-  "use strict";
+  'use strict';
 
   var router, Router;
 
-  Router = Backbone.Router.extend({
+  app.on('initialize:before', function() {
 
-    routes: {
-      '*default' :  'index'
-    },
-    
-    index: function() {
-      console.log('default route');
-    }
+    Router = Backbone.Router.extend({
+
+      routes: {
+        '*default' :  'index'
+      },
+
+      index: function() {
+        console.log('default route');
+      }
+
+    });
+
+    app.router = new Router();
 
   });
 
-  router = new Router();
+  app.on('start', function () {
+    if (Backbone.history) {
+      Backbone.history.start();
+    }
+  });
 
-  app.namespace.setItem('router', router);
-
-  Backbone.history.start();
-
-  return router;
+  return app;
 
 });
