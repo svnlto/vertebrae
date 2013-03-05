@@ -8,7 +8,7 @@ require.config({
     lib:           '../lib/',
     tests:         '../tests',
     app:           '.',
-    text:          '/lib/require-text/text',
+    text:          '/lib/requirejs-text/text',
     hbs:           '/lib/backbone.marionette.hbs/backbone.marionette.hbs',
     jquery:        '/lib/jquery/jquery',
     handlebars:    '/lib/handlebars/handlebars',
