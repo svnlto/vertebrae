@@ -16,11 +16,11 @@ function (app) {
     timeout: app.request('entities:config').get('ajaxCache')
   });
 
-  $('body').ajaxStart(function() {
+  $(document).ajaxStart(function() {
     app.vent.trigger('ajax:start');
   });
 
-  $('body').ajaxStop(function() {
+  $(document).ajaxStop(function() {
     app.vent.trigger('ajax:stop');
   });
 
