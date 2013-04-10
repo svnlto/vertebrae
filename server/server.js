@@ -14,6 +14,7 @@ module.exports = function(opts) {
 
   site.configure(function() {
     [ 'app', 'lib', 'assets', 'tests' ].forEach(function(dir) {
+      site.use(express.compress());
       site.use('/' + dir, staticDir(opts.baseDir + dir));
     });
     site.use(express.bodyParser());
