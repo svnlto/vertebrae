@@ -32,7 +32,6 @@ require.config({
       exports: 'Handlebars'
     }
 
-
   }
 });
 
@@ -49,7 +48,3 @@ window.requirejs.onError = function (err) {
 
   throw err;
 };
-
-if (!window.mocha) {
-  require(['main']);
-}
