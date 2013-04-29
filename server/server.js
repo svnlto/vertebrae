@@ -1,8 +1,7 @@
 var express   = require('express'),
     fs        = require('fs'),
-    _         = require('underscore'),
-
-    site      = express(),
+    _         = require('lodash'),
+    app       = express(),
     staticDir = express['static'];
 
 module.exports = function(opts) {
@@ -12,25 +11,25 @@ module.exports = function(opts) {
     baseDir :   './'
   }, opts || {});
 
-  site.configure(function() {
+  app.configure(function() {
     [ 'app', 'lib', 'assets', 'tests' ].forEach(function(dir) {
-      site.use(express.compress());
-      site.use('/' + dir, staticDir(opts.baseDir + dir));
+      app.use(express.compress());
+      app.use('/' + dir, staticDir(opts.baseDir + dir));
     });
-    site.use(express.bodyParser());
+    app.use(express.bodyParser());
   });
 
-  site.get("/", function(req, res) {
+  app.get("/", function(req, res) {
     fs.createReadStream(opts.baseDir + 'app/index.html').pipe(res);
   });
 
   if (opts.tests) {
-    site.get("/_test", function(req, res) {
+    app.get("/_test", function(req, res) {
       fs.createReadStream(opts.baseDir + 'tests/app/runner.html').pipe(res);
     });
   }
 
   // Actually listen
-  site.listen(opts.port || null);
+  app.listen(opts.port || null);
   console.log("Serving at http://localhost:" + (opts.port || ''));
 };
