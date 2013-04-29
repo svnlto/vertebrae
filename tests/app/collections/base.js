@@ -3,7 +3,7 @@
 //
 
 define([
-  'collections/base',
+  'helpers/mvc/collection',
 ],
 
 function(Collection) {
@@ -26,32 +26,20 @@ function(Collection) {
       this.server.restore();
     });
 
+    it('should provide a new instance of controller', function() {
+      expect(this.collection instanceof Backbone.Collection).to.be.ok;
+    });
+
+    it('should have a next property', function () {
+      expect(this.collection).to.have.property('next');
+    });
+
+    it('should have a prev property', function () {
+      expect(this.collection).to.have.property('prev');
+    });
+
     it("should return a URI-encoded URL", function() {
       expect(this.collection.url).to.equal('/examples');
-    });
-
-    it("should trigger a fetching event when fetching", function() {
-      var flag;
-
-      this.collection.on('fetching', function() {
-        flag = true;
-      });
-      this.collection.fetch();
-
-      expect(flag).to.be.ok;
-    });
-
-    it("should trigger a change event when the fetch is complete", function(done) {
-      var flag;
-
-      this.timeout(2000);
-      this.collection.on('change', function() {
-        flag = true;
-      });
-      this.collection.fetch().then(function() {
-        expect(flag).to.be.ok;
-        done();
-      });
     });
 
   });

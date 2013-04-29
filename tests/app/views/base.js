@@ -3,11 +3,11 @@
 //
 
 define([
-  'views/base',
-  'helpers/namespace'
+  'helpers/namespace',
+  'marionette'
 ],
 
-function(BaseView, app) {
+function(app, Marionette) {
 
   "use strict";
 
@@ -30,8 +30,9 @@ function(BaseView, app) {
       ]);
 
     beforeEach(function() {
-      view = new BaseView({
-        model: collection.first()
+      view = new Backbone.View({
+        model: collection.first(),
+        template: '<div></div>'
       });
       view.render();
     });

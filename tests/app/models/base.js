@@ -3,7 +3,7 @@
 //
 
 define([
-  'models/base'
+  'helpers/mvc/model'
 ],
 
 function(Model) {
@@ -16,9 +16,9 @@ function(Model) {
       this.model = new Model();
     });
 
-    it('should have its idAttribute set to _id', function() {
+    it('should have its idAttribute set to id', function() {
       expect(this.model).to.have.property('idAttribute');
-      expect(this.model.idAttribute).to.equal('_id');
+      expect(this.model.idAttribute).to.equal('id');
     });
 
   });
