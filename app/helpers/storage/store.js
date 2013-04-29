@@ -4,24 +4,32 @@
 
 define([
   'helpers/namespace',
-  'entities/config'
+  'helpers/storage/storeError',
+  'helpers/storage/storeSuccess',
 ],
 
-function (app) {
+function(app, storeError, storeSuccess) {
 
   "use strict";
 
-  $.ajaxSetup({
-    cache : app.request('entities:config').get('ajaxCache'),
-    timeout: app.request('entities:config').get('ajaxCache')
-  });
+  app.addInitializer(function(config) {
 
-  $('body').ajaxStart(function() {
-    app.vent.trigger('ajax:start');
-  });
+    $.ajaxSetup({
+      cache : config.ajaxCache,
+      timeout: config.ajaxTimeout
+    });
 
-  $('body').ajaxStop(function() {
-    app.vent.trigger('ajax:stop');
+    $(document).ajaxStart(function() {
+      app.vent.trigger('ajax:start');
+    });
+
+    $(document).ajaxStop(function() {
+      app.vent.trigger('ajax:stop');
+    });
+
+    $(document).ajaxError(storeError);
+    $(document).ajaxSuccess(storeSuccess);
+
   });
 
 });
