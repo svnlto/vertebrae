@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'prod/app/index.html': 'app/index.html',
-          'prod/assets/css/': 'assets/css/**'
+          'prod/assets/css/app/': 'assets/css/**'
         }
       }
     },
