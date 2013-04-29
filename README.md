@@ -1,5 +1,7 @@
 # vertebrae
 
+[![Build Status](https://travis-ci.org/svnlto/vertebrae.png?branch=master)](https://travis-ci.org/svnlto/vertebrae)
+
 __yet another Backbone.Marionette Boilerplate__
 
 this is the sort of app structure I would usually start off a Backbone
