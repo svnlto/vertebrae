@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         replaceRequireScript: [{
           files: ['prod/app/index.html'],
           module: 'main',
-          modulePath: 'prod/app/main'
+          modulePath: 'app/main'
         }],
         insertRequire: ['main'],
         baseUrl: "app/",
