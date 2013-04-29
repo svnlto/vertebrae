@@ -16,18 +16,19 @@ require.config({
 
 require([
   'jquery',
-  'underscore',
+  'lodash',
   'backbone',
   'chai',
   'sinon'
-], function (jquery, _, Backbone, chai, sinon) {
+],
+
+function (jquery, _, Backbone, chai, sinon) {
 
   'use strict';
 
   window.expect = chai.expect;
   window.mocha.setup({
     ui: 'bdd',
-    reporter: window.mocha.reporters.HTML,
     ignoreLeaks: true
   });
 
