@@ -10,6 +10,6 @@
     "handlebars": "1.0.0-rc.3",
     "backbone": "1.0.0",
     "backbone.marionette": "1.0.2",
-    "backbone.marionette.hbs": "git@github.com:svnlto/backbone.marionette.hbs.git"
+    "backbone.marionette.hbs": "0.0.2"
   }
 }
