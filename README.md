@@ -61,8 +61,7 @@ under: `/prod`
 
 ### Changelog ###
 
-0.2.1 / 2013-04-29
-==================
+#### 0.2.1 / 2013-04-29
 
   * [fix] refer to backbone.marionette.hbs by version number
   * [fix] grunt copy css path
