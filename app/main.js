@@ -4,13 +4,21 @@
 
 require([
   'helpers/namespace',
-  'router'
+  'router',
+  'models/config'
 ],
 
-function(app, router) {
+function(app, router, Config) {
 
   'use strict';
 
-  app.start();
+  var config = new Config(),
+      options = config.toJSON();
+
+  app.reqres.setHandler('config', function() {
+    return options;
+  });
+
+  app.start(options);
 
 });
