@@ -3,13 +3,21 @@
 //
 
 define([
-  'marionette'
+  'marionette',
+  'models/config'
 ],
 
-function (Marionette) {
+function(Marionette, ConfigModel) {
 
   'use strict';
 
-  return new Marionette.Application();
+  var config = new ConfigModel(),
+      app = new Marionette.Application();
+
+  if (config.get('debug')) {
+    window.app = app;
+  }
+
+  return app;
 
 });
