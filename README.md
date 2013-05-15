@@ -16,9 +16,6 @@ that could be added.
 the readme assumes that you have NPM and Bower installed.
 
 
-__Also, thanks to [@rmurphey](https://github.com/rmurphey) for the inspiration on getting this
-project up on github.__
-
 ## App Structure ##
 
 * `app` - holds the backbone app
