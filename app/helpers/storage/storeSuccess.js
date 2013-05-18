@@ -14,12 +14,6 @@ function (app) {
     var statusCode = jqXHR.status + '';
 
     var success = {
-      '200' : function() { },
-
-      '201' : function() { },
-
-      '204' : function() { },
-
       'default' : function () {
         console.log('SUCCESS', jqXHR, res);
       }
