@@ -8,14 +8,14 @@ require([
   'models/config'
 ],
 
-function(app, router, Config) {
+function (app, router, Config) {
 
   'use strict';
 
   var config = new Config(),
       options = config.toJSON();
 
-  app.reqres.setHandler('config', function() {
+  app.reqres.setHandler('config', function () {
     return options;
   });
 

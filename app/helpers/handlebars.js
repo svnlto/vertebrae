@@ -6,14 +6,14 @@ define([
   'handlebars'
 ],
 
-function(Handlebars) {
+function (Handlebars) {
 
   "use strict";
 
   //
   // place {{ debug }}
   //
-  Handlebars.registerHelper('debug', function(optionalValue) {
+  Handlebars.registerHelper('debug', function (optionalValue) {
     console.log("Current Context");
     console.log("====================");
     console.log(this);

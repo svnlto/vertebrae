@@ -6,7 +6,7 @@ define([
   'helpers/namespace'
 ],
 
-function(app) {
+function (app) {
 
   'use strict';
 
@@ -19,7 +19,7 @@ function(app) {
     try {
       errorObj = jQuery.parseJSON(jqXHR.responseText);
     }
-    catch(e) {}
+    catch (e) {}
 
     var errors = {
       'default' : function () { }

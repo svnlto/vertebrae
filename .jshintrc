@@ -65,6 +65,10 @@
   "sub": false,
   "trailing": true,
   "white": false,
-  "multistr": true
+  "multistr": true,
+  "indent": 2,
+  "maxcomplexity": 6,
+  "maxdepth": 4,
+  "maxstatements": 25
 }
 

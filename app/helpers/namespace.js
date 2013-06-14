@@ -7,7 +7,7 @@ define([
   'models/config'
 ],
 
-function(Marionette, ConfigModel) {
+function (Marionette, ConfigModel) {
 
   'use strict';
 

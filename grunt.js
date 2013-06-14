@@ -2,7 +2,7 @@
 var fs = require('fs'),
     jshintOptions = JSON.parse(fs.readFileSync('./.jshintrc'));
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   "use strict";
 

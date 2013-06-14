@@ -7,11 +7,11 @@ define([
   'marionette'
 ],
 
-function(app, Marionette) {
+function (app, Marionette) {
 
   'use strict';
 
-  app.on('initialize:before', function() {
+  app.on('initialize:before', function () {
 
     var Router = Backbone.Router.extend({
 
@@ -19,7 +19,7 @@ function(app, Marionette) {
         '*default' :  'index'
       },
 
-      index: function() {
+      index: function () {
         console.log('default route');
       }
 

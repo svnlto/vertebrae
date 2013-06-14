@@ -8,22 +8,22 @@ define([
   'helpers/storage/storeSuccess',
 ],
 
-function(app, storeError, storeSuccess) {
+function (app, storeError, storeSuccess) {
 
   "use strict";
 
-  app.addInitializer(function(config) {
+  app.addInitializer(function (config) {
 
     $.ajaxSetup({
       cache : config.ajaxCache,
       timeout: config.ajaxTimeout
     });
 
-    $(document).ajaxStart(function() {
+    $(document).ajaxStart(function () {
       app.vent.trigger('ajax:start');
     });
 
-    $(document).ajaxStop(function() {
+    $(document).ajaxStop(function () {
       app.vent.trigger('ajax:stop');
     });
 
