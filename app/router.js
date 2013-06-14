@@ -11,11 +11,9 @@ function(app, Marionette) {
 
   'use strict';
 
-  var router, Router;
-
   app.on('initialize:before', function() {
 
-    Router = Backbone.Router.extend({
+    var Router = Backbone.Router.extend({
 
       routes: {
         '*default' :  'index'
