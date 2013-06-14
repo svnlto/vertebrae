@@ -7,9 +7,9 @@
     "requirejs": "2.0.6",
     "requirejs-text": "2.0.5",
     "lodash": "1.0.1",
-    "handlebars": "1.0.0-rc.3",
+    "handlebars": "1.0.0",
     "backbone": "1.0.0",
     "backbone.marionette": "1.0.2",
-    "backbone.marionette.hbs": "0.0.2"
+    "backbone.marionette.hbs": "0.0.3"
   }
 }
