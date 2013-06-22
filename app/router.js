@@ -21,7 +21,7 @@ function (Backbone, app) {
       },
 
       index: function () {
-        require(['controllers/index'], function(Controller) {
+        require(['controllers/index'], function (Controller) {
           new Controller();
         });
       }
