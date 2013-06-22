@@ -3,11 +3,12 @@
 //
 
 define([
+  'backbone',
   'helpers/namespace',
   'marionette'
 ],
 
-function (app, Marionette) {
+function (Backbone, app) {
 
   'use strict';
 
@@ -20,7 +21,9 @@ function (app, Marionette) {
       },
 
       index: function () {
-        console.log('default route');
+        require(['controllers/index'], function(Controller) {
+          new Controller();
+        });
       }
 
     });
