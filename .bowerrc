@@ -1,4 +1,3 @@
 {
-  "directory" : "lib",
-  "json"      : "component.json"
+  "directory" : "lib"
 }
