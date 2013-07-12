@@ -20,14 +20,14 @@ function(app, Marionette) {
         _id: null
       };
 
-      var Data = Backbone.Collection.extend({
-        fetch : function() {}
-      });
+    var Data = Backbone.Collection.extend({
+      fetch : function() {}
+    });
 
-      collection = new Data([
-        _.extend(_.clone(baseItem), {title: 'some title a', _id: 'asdfasdfasdfasf'}),
-        _.extend(_.clone(baseItem), {title: 'b', _id: '222asdfasdfasdfasdf'})
-      ]);
+    collection = new Data([
+      _.extend(_.clone(baseItem), {title: 'some title a', _id: 'asdfasdfasdfasf'}),
+      _.extend(_.clone(baseItem), {title: 'b', _id: '222asdfasdfasdfasdf'})
+    ]);
 
     beforeEach(function() {
       view = new Backbone.View({
@@ -42,21 +42,21 @@ function(app, Marionette) {
     });
 
     it("should have a 'el' of 'div'", function() {
-      expect(view.tagName).to.equal('div');
+      expect(view.tagName).to.eql('div');
     });
 
     it("should have a 'render' method", function() {
       expect(view).to.have.property('render');
-      expect(view.render).to.be.ok;
+      expect(view.render).to.be.ok();
     });
 
     it("should have a model instance bound", function() {
       expect(view.model).to.be.an('object');
-      expect(view.model).to.be.an.instanceof(Backbone.Model);
+      expect(view.model instanceof Backbone.Model).to.be.ok();
     });
 
     it("should have a key of 'hash' on its options hash", function() {
-      expect(view.options[0]).to.be.undefined;
+      expect(view.options[0]).to.be(undefined);
     });
 
   });

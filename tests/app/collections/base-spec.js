@@ -27,7 +27,7 @@ function(Collection) {
     });
 
     it('should provide a new instance of controller', function() {
-      expect(this.collection instanceof Backbone.Collection).to.be.ok;
+      expect(this.collection instanceof Backbone.Collection).to.be.ok();
     });
 
     it('should have a next property', function () {
@@ -39,7 +39,7 @@ function(Collection) {
     });
 
     it("should return a URI-encoded URL", function() {
-      expect(this.collection.url).to.equal('/examples');
+      expect(this.collection.url).to.eql('/examples');
     });
 
   });

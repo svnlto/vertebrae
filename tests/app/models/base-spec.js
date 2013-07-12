@@ -18,7 +18,7 @@ function(Model) {
 
     it('should have its idAttribute set to id', function() {
       expect(this.model).to.have.property('idAttribute');
-      expect(this.model.idAttribute).to.equal('id');
+      expect(this.model.idAttribute).to.eql('id');
     });
 
   });
