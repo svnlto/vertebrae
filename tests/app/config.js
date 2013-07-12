@@ -1,7 +1,7 @@
 'use strict';
 
 var tests = Object.keys(window.__karma__.files).filter(function (file) {
-  return /spec\.js$/.test(file);
+  return (/.-spec.js$/).test(file);
 });
 
 
