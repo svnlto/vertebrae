@@ -3,7 +3,7 @@
 //
 
 define([
-  'helpers/mvc/collection',
+  'helpers/mvc/collection'
 ],
 
 function(Collection) {
