@@ -1,43 +1,45 @@
-require.config({
-  paths: {
-    'chai':                 '/tests/lib/chai',
-    'sinon':                '/tests/lib/sinon'
-  },
-  shim: {
-    'chai': {
-      exports: 'expect'
-    },
-    'sinon': {
-      exports: 'sinon'
-    }
-  }
+'use strict';
 
+var tests = Object.keys(window.__karma__.files).filter(function (file) {
+  return (/.-spec.js$/).test(file);
 });
 
-require([
-  'jquery',
-  'lodash',
-  'backbone',
-  'chai',
-  'sinon'
-],
 
-function (jquery, _, Backbone, chai, sinon) {
+require.config({
+  baseUrl:         '/base/app',
+  paths: {
+    jquery:        '../lib/jquery/jquery',
+    text:          '../lib/requirejs-text/text',
+    hbs:           '../lib/backbone.marionette.hbs/backbone.marionette.hbs',
+    handlebars:    '../lib/handlebars/handlebars',
+    lodash:        '../lib/lodash/lodash',
+    backbone:      '../lib/backbone/backbone',
+    marionette:    '../lib/backbone.marionette/lib/backbone.marionette'
+  },
 
-  'use strict';
+  map: {
+    '*': { 'underscore': 'lodash' }
+  },
 
-  window.expect = chai.expect;
-  window.mocha.setup({
-    ui: 'bdd',
-    ignoreLeaks: true
-  });
+  shim: {
+    'backbone': {
+      deps: ['lodash', 'jquery'],
+      exports: 'Backbone'
+    },
 
-  require([
-    'tests/app/models/base',
-    'tests/app/collections/base',
-    'tests/app/views/base'
-  ], function () {
-    window.mocha.run();
-  });
+    'marionette': {
+      deps: ['backbone'],
+      exports: 'Backbone.Marionette'
+    },
+
+    'handlebars': {
+      exports: 'Handlebars'
+    }
+  },
+  // ask Require.js to load these files (all our tests)
+  deps: tests,
+
+  // start test run, once Require.js is done
+  callback: window.__karma__.start
 
 });
