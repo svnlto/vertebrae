@@ -1,14 +1,14 @@
 'use strict';
 
 var tests = Object.keys(window.__karma__.files).filter(function (file) {
-  console.log(file);
-  return /-spec\.js$/.test(file);
+  return /spec\.js$/.test(file);
 });
 
 
 require.config({
   baseUrl:         '/base/app',
   paths: {
+    jquery:        '../lib/jquery/jquery',
     text:          '../lib/requirejs-text/text',
     hbs:           '../lib/backbone.marionette.hbs/backbone.marionette.hbs',
     handlebars:    '../lib/handlebars/handlebars',
