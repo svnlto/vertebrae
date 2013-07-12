@@ -3,7 +3,7 @@
 
 
 // base path, that will be used to resolve files and exclude
-basePath = '../..';
+basePath = '';
 
 
 // list of files / patterns to load in the browser
@@ -14,24 +14,34 @@ files = [
   REQUIRE_ADAPTER,
 
   // put all components in requirejs 'paths' config here (included: false)
-  { pattern: 'app/lib/**/*.js', watched: false, included: true},
-  { pattern: 'app/**/*.js', watched: true, included: true },
+  //{ pattern: 'lib/**/*.js', watched: false, included: false},
+  { pattern: 'app/**/*.js', watched: true, included: false},
 
   // all src and test modules (included: false)
-  { pattern: 'tests/app/**/*-spec.js', watched: true, included: false },
+  { pattern: 'tests/app/collections/*.js', watched: true, included: false },
+  { pattern: 'tests/app/models/*.js', watched: true, included: false },
+  { pattern: 'tests/app/views/*.js', watched: true, included: false },
 
   // libs required for test framework
-  { pattern: 'tests/lib/chai.js', watched: false, included: true },
   { pattern: 'tests/lib/sinon.js', watched: false, included: true },
+  { pattern: 'lib/expect/expect.js', watched: false, included: true},
 
   // app config require module last
+  { pattern: 'lib/requirejs-text/text.js', watched: false, included: false},
+  { pattern: 'lib/jquery/jquery.js', watched: false, included: false},
+  { pattern: 'lib/lodash/lodash.js', watched: false, included: false},
+  { pattern: 'lib/backbone/backbone.js', watched: false, included: false},
+  { pattern: 'lib/backbone.marionette/lib/backbone.marionette.js', watched: false, included: false},
+  { pattern: 'lib/handlebars/handlebars.js', watched: false, included: false},
+  { pattern: 'lib/backbone.marionette.hbs/backbone.marionette.hbs.js', watched: false, included: false},
+
   'tests/app/config.js'
 ];
 
 
 // list of files to exclude
 exclude = [
-  'app/main.js'
+  'app/config.js'
 ];
 
 
@@ -54,7 +64,7 @@ colors = true;
 
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-logLevel = LOG_DEBUG;
+logLevel = LOG_INFO;
 
 
 // enable / disable watching file and executing tests whenever any file changes
@@ -78,4 +88,4 @@ captureTimeout = 60000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
-singleRun = false;
+singleRun = true;
