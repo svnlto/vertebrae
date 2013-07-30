@@ -3,10 +3,9 @@
 //
 
 require.config({
-  deps:            window.mocha ? ['../tests/app/config'] : ['main'],
+  deps:            ['main'],
   paths: {
     lib:           '../lib/',
-    tests:         '../tests',
     app:           '.',
     text:          '/lib/requirejs-text/text',
     hbs:           '/lib/backbone.marionette.hbs/backbone.marionette.hbs',
