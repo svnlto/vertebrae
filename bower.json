@@ -4,7 +4,7 @@
   "main": ".app/index.html",
   "dependencies": {
     "jquery": "1.9.1",
-    "requirejs": "2.0.6",
+    "requirejs": "2.1.8",
     "requirejs-text": "2.0.7",
     "lodash": "1.0.1",
     "handlebars": "1.0.0",
