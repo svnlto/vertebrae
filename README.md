@@ -19,10 +19,11 @@ the readme assumes that you have NPM and Bower installed.
 * `lib` - js libraries used by the backbone apps
 * `prod` - this is where stuff goes post build
 * `server` - the actual web server
-* `tests` - mocha / chai based unit tests
+* `tests` - mocha / expect based unit tests
 
-* `grunt.js`  - [grunt.js](http://gruntjs.com "grunt.js") grunt file ( look out for the watch and build task )
-* `testem.yml` - [testem](https://github.com/airportyh/testem "Testem") control file
+* `Gruntfile.js`  - [grunt.js](http://gruntjs.com "grunt.js") grunt file ( look out for the watch and build task )
+* `karma.conf.js` - [karma](https://github.com/karma-runner/karma)
+  config file
 
 ## Usage ##
 
