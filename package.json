@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "node bin/server",
+    "postinstall": "bower install",
     "dev": "node bin/dev",
     "test": "grunt test --verbose"
   }
