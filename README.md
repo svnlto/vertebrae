@@ -27,7 +27,7 @@ the readme assumes that you have NPM and Bower installed.
 
 Run the following commands from within the project directory
 
-`npm install` `bower install`
+`npm install`
 
 start node service
 
