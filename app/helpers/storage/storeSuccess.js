@@ -2,11 +2,7 @@
 // helpers.storage.storeSuccess
 //
 
-define([
-  'helpers/namespace'
-],
-
-function (app) {
+define(function () {
 
   'use strict';
 

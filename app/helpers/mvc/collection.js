@@ -2,13 +2,23 @@
 // ## helpers.mvc.collection
 //
 
+// extends default Backbone Collection with some helpful methods
+//
+// Available methods are:
+//
+// ```
+// collection.next(model)
+// collection.prev(model)
+// ```
+
 define([
+  'lodash',
   'backbone'
 ],
 
-function (Backbone) {
+function (_, Backbone) {
 
-  "use strict";
+  'use strict';
 
   var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
 

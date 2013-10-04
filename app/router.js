@@ -1,43 +1,28 @@
-//
-// ## router
-//
-
 define([
-  'backbone',
-  'helpers/namespace',
-  'marionette'
+  'backbone'
 ],
 
-function (Backbone, app) {
+function (Backbone) {
 
   'use strict';
 
-  app.on('initialize:before', function () {
+  var Router = Backbone.Router.extend({
 
-    var Router = Backbone.Router.extend({
+    routes: {
+      'index'                 : 'index',
+      'index/:id'             : 'index',
+      'index/:id/:action'     : 'index'
+    },
 
-      routes: {
-        '*default' :  'index'
-      },
-
-      index: function () {
-        require(['controllers/index'], function (Controller) {
-          new Controller();
-        });
-      }
-
-    });
-
-    app.router = new Router();
-
-  });
-
-  app.on('start', function () {
-    if (Backbone.history) {
-      Backbone.history.start();
+    index: function (id, action) {
+      app.vent.trigger('app:route:index', {
+        id: id || null,
+        action: action || null
+      });
     }
+
   });
 
-  return app;
+  return Router;
 
 });

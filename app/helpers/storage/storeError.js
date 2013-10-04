@@ -2,19 +2,13 @@
 //  helpers.storage.storeError
 //
 
-define([
-  'helpers/namespace'
-],
-
-function (app) {
+define(function () {
 
   'use strict';
 
-  var errors = function (e, jqXHR, req, err) {
-    var statusCode = jqXHR.status + '',
-        url = req.url,
-        type =  req.type,
-        errorObj = null;
+  var errors = function (e, jqXHR) {
+    var statusCode = jqXHR.status + '';
+    var errorObj = null;
 
     try {
       errorObj = jQuery.parseJSON(jqXHR.responseText);

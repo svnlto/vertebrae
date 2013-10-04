@@ -5,12 +5,12 @@
 define([
   'helpers/namespace',
   'helpers/storage/storeError',
-  'helpers/storage/storeSuccess',
+  'helpers/storage/storeSuccess'
 ],
 
 function (app, storeError, storeSuccess) {
 
-  "use strict";
+  'use strict';
 
   app.addInitializer(function (config) {
 

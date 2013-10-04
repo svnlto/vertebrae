@@ -28,8 +28,7 @@
     "window",
     "before",
     "after",
-    "xit",
-    "xdescribe"
+    "app"
   ],
   "debug": false,
   "devel": false,
@@ -63,11 +62,12 @@
   "plusplus": false,
   "sub": false,
   "trailing": true,
-  "white": false,
+  "white": true,
+  "unused": true,
   "multistr": true,
-  "indent": 2,
-  "maxcomplexity": 6,
+  "maxcomplexity": 10,
   "maxdepth": 4,
-  "maxstatements": 25
+  "maxstatements": 25,
+  "quotmark": "single",
+  "indent": 2
 }
-

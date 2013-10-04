@@ -1,15 +1,31 @@
-module.exports = function(grunt) {
+/*global module:false*/
+
+module.exports = function (grunt) {
 
   'use strict';
 
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+  // custom tasks
+  grunt.loadTasks('build/tasks/');
 
-    jshint: {
+  grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-groc');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-lintblame');
+
+  // Project configuration.
+  grunt.initConfig({
+
+    lintblame: {
       files: [
         'Gruntfile.js',
-        'tests/app/**/*.js',
-        'app/**/*.js'
+        'karma.conf.js',
+        'app/**/*.js',
+        'tests/**/*-spec.js',
+        'tests/app/config.js'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -17,25 +33,27 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'shell:test']
+      files: ['<%= lintblame.files %>', 'assets/less/**/*.less', 'app/**/*.less', '!app/compiled/*'],
+      tasks: ['lintblame', 'karma', 'recess', 'dependencies_builder', 'template_builder']
     },
 
     copy: {
       dist: {
         files: {
           'prod/app/index.html': 'app/index.html',
-          'prod/assets/css/app/': 'assets/css/**'
+          'prod/': ['assets/**']
         }
       }
     },
 
-    shell: {
-      test: {
-        command: 'node node_modules/karma/bin/karma start',
+    recess: {
+      white: {
         options: {
-          stdout: true,
-          stderr: true
+          compile: true,
+          compress: true
+        },
+        files: {
+          'assets/css/app.css' : ['assets/less/themes/app.less']
         }
       }
     },
@@ -50,32 +68,61 @@ module.exports = function(grunt) {
             modulePath: 'app/main'
           }],
           insertRequire: ['main'],
-          baseUrl: "app/",
-          optimizeCss: "none",
-          optimize: "uglify",
+          baseUrl: 'app/',
+          optimizeCss: 'none',
+          optimize: 'uglify',
           uglify: {
-            "beautify": false,
-            "no-dead-code": true,
-            "reserved-names": "require"
+            'beautify': false,
+            'no-dead-code': true,
+            'reserved-names': 'require'
           },
           inlineText: true,
           useStrict: true,
           findNestedDependencies: true,
           optimizeAllPluginResources: true,
           paths: {
-            app:           '.',
-            text:          '../lib/require-text/text',
+            lib:           '../lib/',
+            text:          '../lib/requirejs-text/text',
             hbs:           '../lib/backbone.marionette.hbs/backbone.marionette.hbs',
             jquery:        '../lib/jquery/jquery',
             handlebars:    '../lib/handlebars/handlebars',
-            lodash:        '../lib/lodash/lodash',
+            lodash:        '../lib/lodash/dist/lodash',
             backbone:      '../lib/backbone/backbone',
-            marionette:    '../lib/backbone.marionette/lib/backbone.marionette'
+            signalr:       '../lib/signalr/index',
+            raygun:        '../lib/raygun/index',
+            moment:        '../lib/momentjs/moment',
+            marionette:    '../lib/backbone.marionette/lib/backbone.marionette',
+            unique:        '../lib/backbone.uniquemodel/backbone.uniquemodel',
+            localStorage:  '../lib/backbone.localStorage/backbone.localStorage',
+            q:             '../lib/q/q',
+            slider:        '../lib/bootstrap-slider/js/bootstrap-slider',
+            modal:         '../lib/bootstrap/js/modal',
+            engineio:      '../lib/engine.io/index',
+            i18n:          '../lib/i18next/release/i18next.amd-1.7.1',
+            cocktail:      '../lib/cocktail/Cocktail'
           },
+
           shim: {
             'backbone': {
               deps: ['lodash', 'jquery'],
               exports: 'Backbone'
+            },
+
+            'engineio': {
+              exports: 'EngineIO'
+            },
+
+            'signalr': {
+              deps: ['jquery'],
+              exports: '$.hubConnection'
+            },
+
+            'moment': {
+              exports: 'Moment'
+            },
+
+            'raygun': {
+              exports: 'Raygun'
             },
 
             'marionette': {
@@ -83,26 +130,71 @@ module.exports = function(grunt) {
               exports: 'Backbone.Marionette'
             },
 
+            'localStorage': {
+              deps: ['backbone'],
+              exports: 'Backbone.LocalStorage'
+            },
+
+            'uniquemodel': {
+              deps: ['backbone'],
+              exports: 'Backbone.UniqueModel'
+            },
+
             'handlebars': {
               exports: 'Handlebars'
             }
+
           },
-          out: "prod/app/main.js",
-          name: "main"
+          deps: ['compiled/dependencies', 'compiled/templates'],
+          out: 'prod/app/main.js',
+          name: 'main'
         }
+      }
+    },
+
+    template_builder: {
+      options: {
+        src: 'app/components/**',
+        dest: 'app/compiled/templates.js'
+      }
+    },
+
+    dependencies_builder: {
+      options: {
+        src: 'app/components/**',
+        dest: 'app/compiled/dependencies.js'
+      }
+    },
+
+    comment_builder: {
+      options: {
+        src: 'prod/app/index.html'
+      }
+    },
+
+    groc: {
+      javascript: [
+        'app/**/*.js'
+      ],
+      options: {
+        'out': 'docs/',
+        'whitespace-after-token': false
+      }
+    },
+
+    karma: {
+      'default': {
+        configFile: 'karma.conf.js'
       }
     }
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-requirejs');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-shell');
+  // Default task.
+  grunt.registerTask('default', 'lintblame');
 
-  grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('test', ['shell:test']);
-  grunt.registerTask('build', ['jshint', 'copy', 'requirejs']);
+  grunt.registerTask('test', ['lintblame', 'karma']);
+  grunt.registerTask('build', ['lintblame', 'karma', 'template_builder', 'dependencies_builder', 'recess', 'copy', 'requirejs', 'comment_builder']);
+  grunt.registerTask('docs', 'groc');
 
 };
