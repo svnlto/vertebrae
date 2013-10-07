@@ -13,17 +13,12 @@ function (Collection) {
   describe('Base collection', function () {
 
     beforeEach(function () {
-      this.server = sinon.fakeServer.create();
       this.server.respondWith('GET', '/examples', [200, {'Content-Type': 'application-json'}, '{}']);
       this.server.respond();
       this.server.autoRespond = true;
 
       this.collection = new Collection();
       this.collection.url = '/examples';
-    });
-
-    afterEach(function () {
-      this.server.restore();
     });
 
     it('should provide a new instance of controller', function () {

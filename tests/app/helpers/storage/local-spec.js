@@ -18,8 +18,6 @@ function (sStorage) {
 
       this.storage.clear();
 
-      this.sandbox = sinon.sandbox.create();
-
       this.spyS = this.sandbox.spy(this.storage, 'setItem');
       this.spyG = this.sandbox.spy(this.storage, 'getItem');
       this.spyR = this.sandbox.spy(this.storage, 'removeItem');
@@ -27,10 +25,6 @@ function (sStorage) {
 
       this.objA = { name: 'sven' };
       this.objB = { name: 'alf' };
-    });
-
-    afterEach(function () {
-      this.sandbox.restore();
     });
 
     describe('Methods', function () {

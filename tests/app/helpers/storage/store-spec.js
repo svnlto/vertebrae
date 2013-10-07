@@ -19,7 +19,6 @@ function (helper, $) {
 
       var app = helper.app;
 
-      this.sandbox = sinon.sandbox.create();
       this.ajaxSpy = this.sandbox.spy($, 'ajaxSetup');
 
       this.ventOnSpy = this.sandbox.spy(app.vent, 'on');
@@ -33,19 +32,12 @@ function (helper, $) {
 
     });
 
-    afterEach(function () {
-      this.sandbox.restore();
-    });
-
     describe('Events', function () {
 
-      it.skip('should trigger ajax:start request has started', function (done) {
-        var self = this;
-
-        self.ajax.success(function () {
-          expect(self.ventTriggerSpy.args[0][0]).to.eql('ajax:start');
-          done();
-        });
+      it('should trigger ajax:start request has started', function () {
+        this.ajax.success(function () {
+          expect(this.ventTriggerSpy.args[0][0]).to.eql('ajax:start');
+        }, this);
 
       });
 
