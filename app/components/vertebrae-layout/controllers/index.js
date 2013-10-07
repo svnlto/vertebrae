@@ -14,15 +14,14 @@ function (app, Marionette, _, Backbone, Q) {
 
   'use strict';
 
-  var Controller = Marionette.Controller.extend({
+  return Marionette.Controller.extend({
 
     initialize: function (options) {
       this.options = options || {};
       this.layout = options.config.template || 'components/vertebrae-layout/templates/index';
 
       // wait till promises have been resolved, then execute
-      this._addLayout()
-      .then(function () {
+      this._addLayout().then(function () {
         app.vent.trigger('layout:ready');
       }).fail(function (err) {
         throw new Error(err);
@@ -55,9 +54,8 @@ function (app, Marionette, _, Backbone, Q) {
             dfd.resolve();
           }
 
-        } catch (e) {
-          console.log(e);
-          dfd.reject(e);
+        } catch (err) {
+          dfd.reject(err);
         }
 
       }, this));
@@ -66,7 +64,5 @@ function (app, Marionette, _, Backbone, Q) {
     }
 
   });
-
-  return Controller;
 
 });

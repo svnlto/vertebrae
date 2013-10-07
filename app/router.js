@@ -6,7 +6,7 @@ function (Backbone) {
 
   'use strict';
 
-  var Router = Backbone.Router.extend({
+  return Backbone.Router.extend({
 
     routes: {
       'index'                 : 'index',
@@ -22,7 +22,5 @@ function (Backbone) {
     }
 
   });
-
-  return Router;
 
 });

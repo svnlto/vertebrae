@@ -11,7 +11,7 @@ function (app, LayoutController) {
 
   'use strict';
 
-  app.module('layout', function () {
+  return app.module('layout', function () {
 
     // module options
     this.startWithParent = false;

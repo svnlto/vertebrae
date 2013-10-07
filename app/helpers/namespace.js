@@ -34,18 +34,13 @@ function (_, Backbone, Marionette, Config, Router) {
   app.on('initialize:before', function (options) {
 
     // create router instance
-    //
     app.router = new Router();
 
     // check for registred components
     if (_.has(options.app, 'components')) {
-
       _.each(options.app.components, function (component) {
-
         require([component.path + '/index']);
-
       });
-
     } else {
       throw new Error('no components to load');
     }
@@ -59,10 +54,9 @@ function (_, Backbone, Marionette, Config, Router) {
       });
     }
 
-
   });
 
-  // in case we'd need a router.
+  // start router
   app.on('initialize:before', function () {
     if (Backbone.history) {
       Backbone.history.start();

@@ -27,7 +27,6 @@ function (app, Marionette, AppController) {
 
       this.listenTo(app.vent, 'layout:ready', function () {
         app.module('index').start(options);
-        app.module('secondary').start(options);
         // .....
         // load applicaton components here
         // .....
