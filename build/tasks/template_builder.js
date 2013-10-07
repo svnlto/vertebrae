@@ -1,16 +1,16 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   'use strict';
 
-  grunt.registerTask('template_builder', function() {
+  grunt.registerTask('template_builder', function () {
 
-    var options = grunt.config.get('template_builder.options'),
-        list = [],
-        files = grunt.file.expand(options.src);
+    var options = grunt.config.get('template_builder.options');
+    var list = [];
+    var files = grunt.file.expand(options.src);
 
-    files.forEach( function(file) {
+    files.forEach(function (file) {
       if ((/\.(html)$/i).test(file)) {
-        list.push( '\'text!' +  file.split('/').splice(1).join('/') + '\'');
+        list.push('\'text!' +  file.split('/').splice(1).join('/') + '\'');
       }
     });
 

@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           'prod/app/index.html': 'app/index.html',
-          'prod/': ['assets/**']
+          'prod/': ['assets/images/*', 'assets/css/*']
         }
       }
     },
@@ -88,17 +88,10 @@ module.exports = function (grunt) {
             handlebars:    '../lib/handlebars/handlebars',
             lodash:        '../lib/lodash/dist/lodash',
             backbone:      '../lib/backbone/backbone',
-            signalr:       '../lib/signalr/index',
-            raygun:        '../lib/raygun/index',
-            moment:        '../lib/momentjs/moment',
             marionette:    '../lib/backbone.marionette/lib/backbone.marionette',
             unique:        '../lib/backbone.uniquemodel/backbone.uniquemodel',
             localStorage:  '../lib/backbone.localStorage/backbone.localStorage',
             q:             '../lib/q/q',
-            slider:        '../lib/bootstrap-slider/js/bootstrap-slider',
-            modal:         '../lib/bootstrap/js/modal',
-            engineio:      '../lib/engine.io/index',
-            i18n:          '../lib/i18next/release/i18next.amd-1.7.1',
             cocktail:      '../lib/cocktail/Cocktail'
           },
 
@@ -106,23 +99,6 @@ module.exports = function (grunt) {
             'backbone': {
               deps: ['lodash', 'jquery'],
               exports: 'Backbone'
-            },
-
-            'engineio': {
-              exports: 'EngineIO'
-            },
-
-            'signalr': {
-              deps: ['jquery'],
-              exports: '$.hubConnection'
-            },
-
-            'moment': {
-              exports: 'Moment'
-            },
-
-            'raygun': {
-              exports: 'Raygun'
             },
 
             'marionette': {
