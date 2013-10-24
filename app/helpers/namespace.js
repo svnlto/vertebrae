@@ -54,13 +54,11 @@ function (_, Backbone, Marionette, Config, Router) {
       });
     }
 
-  });
-
-  // start router
-  app.on('initialize:before', function () {
+    // start router
     if (Backbone.history) {
       Backbone.history.start();
     }
+
   });
 
   return app;
