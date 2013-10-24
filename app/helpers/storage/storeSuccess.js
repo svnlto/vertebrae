@@ -11,7 +11,7 @@ define(function () {
 
     var success = {
       'default' : function () {
-        console.log('SUCCESS', jqXHR, res);
+        console.log('SUCCESS', /* jqXHR ,*/ res);
       }
     };
 
