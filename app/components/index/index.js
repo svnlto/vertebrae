@@ -29,7 +29,7 @@ function (app, Marionette, AppController) {
     //
     this.on('before:start', function () {
 
-      app.vent.on('app:route:index', function (data) {
+      this.listenTo(app.vent, 'app:route:index', function (data) {
         this._controller.index(data);
       }, this);
 
