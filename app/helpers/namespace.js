@@ -20,19 +20,12 @@ function (_, Backbone, Marionette, Router) {
 
   var app = new Marionette.Application();
 
-  app.addInitializer(function (options) {
-    // prepare application layout
-    if (_.has(options.app, 'components')) {
-      require(['components/vertebrae-layout/index']);
-    } else {
-      throw new Error('no components to load');
-    }
-  });
 
   //
   // register components before starting app
   //
   app.on('initialize:before', function (options) {
+    require(['components/vertebrae-layout/index']);
 
     // create router instance
     app.router = new Router();
