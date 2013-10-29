@@ -13,9 +13,6 @@ function (app, LayoutController) {
 
   return app.module('layout', function () {
 
-    // module options
-    this.startWithParent = false;
-
     this.addInitializer(function (options) {
       this._controller = new LayoutController(
         options.app.components['vertebrae-layout']

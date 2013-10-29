@@ -12,27 +12,17 @@ function (app, Marionette, AppController) {
 
   'use strict';
 
-  return app.module('index', function () {
-
-    // module options
-    this.startWithParent = false;
+  app.module('index', function () {
 
     //
     // module lifecycle
     //
     this.addInitializer(function (options) {
       this._controller = new AppController(options);
-    });
 
-    //
-    // module events
-    //
-    this.on('before:start', function () {
-
-      this.listenTo(app.vent, 'app:route:index', function (data) {
-        this._controller.index(data);
+      app.vent.on('route:index', function (a, b) {
+        this._controller.index(a, b);
       }, this);
-
     });
 
   });

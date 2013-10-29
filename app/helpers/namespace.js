@@ -11,21 +11,22 @@ define([
   'lodash',
   'backbone',
   'marionette',
-  'models/config',
   'router'
 ],
 
-function (_, Backbone, Marionette, Config, Router) {
+function (_, Backbone, Marionette, Router) {
 
   'use strict';
 
   var app = new Marionette.Application();
 
-  //
-  // set global request handler exposing app config
-  //
-  app.reqres.setHandler('config', function () {
-    return new Config().toJSON();
+  app.addInitializer(function (options) {
+    // prepare application layout
+    if (_.has(options.app, 'components')) {
+      require(['components/vertebrae-layout/index']);
+    } else {
+      throw new Error('no components to load');
+    }
   });
 
   //
@@ -36,23 +37,19 @@ function (_, Backbone, Marionette, Config, Router) {
     // create router instance
     app.router = new Router();
 
-    // check for registred components
-    if (_.has(options.app, 'components')) {
-      _.each(options.app.components, function (component) {
-        require([component.path + '/index']);
-      });
-    } else {
-      throw new Error('no components to load');
-    }
 
     // log to console in debug mode
-    if (app.request('config').debug) {
+    if (options.debug) {
       window.app = app;
 
       app.vent.on('all', function (evt) {
         console.log(evt);
       });
     }
+
+  });
+
+  app.on('start', function () {
 
     // start router
     if (Backbone.history) {

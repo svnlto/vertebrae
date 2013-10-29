@@ -44,7 +44,7 @@ function (app, Marionette, _, Backbone, Q) {
 
           // assign a region to the documents container
           this.container = new Backbone.Marionette.Region({
-            el: '#container'
+            el: '#content'
           });
 
           // bind layout to container element
