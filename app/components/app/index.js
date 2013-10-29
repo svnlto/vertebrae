@@ -22,16 +22,6 @@ function (app, Marionette, AppController) {
     //
     this.addInitializer(function (options) {
       this._controller = new AppController(options);
-
-      app.module('layout').start(options);
-
-      this.listenTo(app.vent, 'layout:ready', function () {
-        app.module('index').start(options);
-        // .....
-        // load applicaton components here
-        // .....
-      });
-
     });
 
   });

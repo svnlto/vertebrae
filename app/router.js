@@ -8,6 +8,10 @@ function (Backbone) {
 
   return Backbone.Router.extend({
 
+    initialize: function () {
+      require(['components/app/index']);
+    },
+
     routes: {
       ''                      : 'index',
       'index'                 : 'index',
