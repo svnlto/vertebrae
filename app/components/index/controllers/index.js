@@ -1,5 +1,5 @@
 //
-// # components.bingo.controllers.index
+// # components.index.controllers.index
 //
 
 define([

@@ -1,5 +1,5 @@
 //
-// # bingo.index
+// # app.index
 //
 
 define([
