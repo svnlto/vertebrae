@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 
     watch: {
       files: ['<%= lintblame.files %>', 'assets/less/**/*.less', 'app/**/*.less', '!app/compiled/*'],
-      tasks: ['lintblame', 'karma', 'recess', 'dependencies_builder', 'template_builder']
+      tasks: ['lintblame', 'karma', 'recess']
     },
 
     copy: {
