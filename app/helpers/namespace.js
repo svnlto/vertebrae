@@ -20,16 +20,11 @@ function (_, Backbone, Marionette, Router) {
 
   var app = new Marionette.Application();
 
-
-  //
-  // register components before starting app
-  //
   app.on('initialize:before', function (options) {
     require(['components/vertebrae-layout/index']);
 
     // create router instance
     app.router = new Router();
-
 
     // log to console in debug mode
     if (options.debug) {
@@ -42,7 +37,7 @@ function (_, Backbone, Marionette, Router) {
 
   });
 
-  app.on('start', function () {
+  app.on('initialize:after', function () {
 
     // start router
     if (Backbone.history) {

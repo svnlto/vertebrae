@@ -13,10 +13,10 @@ function (Backbone) {
     },
 
     routes: {
-      ''                      : 'index',
       'index'                 : 'index',
       'index/:id'             : 'index',
-      'index/:id/:action'     : 'index'
+      'index/:id/:action'     : 'index',
+      ''                      : 'index'
     },
 
     index: function (id, action) {

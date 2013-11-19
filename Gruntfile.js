@@ -120,24 +120,9 @@ module.exports = function (grunt) {
             }
 
           },
-          deps: ['compiled/dependencies', 'compiled/templates'],
           out: 'prod/app/main.js',
           name: 'main'
         }
-      }
-    },
-
-    template_builder: {
-      options: {
-        src: 'app/components/**',
-        dest: 'app/compiled/templates.js'
-      }
-    },
-
-    dependencies_builder: {
-      options: {
-        src: 'app/components/**',
-        dest: 'app/compiled/dependencies.js'
       }
     },
 
@@ -169,7 +154,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', 'lintblame');
 
   grunt.registerTask('test', ['lintblame', 'karma']);
-  grunt.registerTask('build', ['lintblame', 'karma', 'template_builder', 'dependencies_builder', 'recess', 'copy', 'requirejs', 'comment_builder']);
+  grunt.registerTask('build', ['lintblame', 'karma', 'recess', 'copy', 'requirejs', 'comment_builder']);
   grunt.registerTask('docs', 'groc');
 
 };
