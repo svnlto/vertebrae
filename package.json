@@ -16,7 +16,6 @@
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.0",
     "grunt-requirejs": "0.4.0",
-    "grunt-shell": "0.3.0",
     "grunt-recess": "~0.3.3",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-karma": "0.7.0",
@@ -33,7 +32,6 @@
     "karma-coverage": "~0.1.0",
     "karma-mocha": "~0.1.0",
     "karma": "~0.10.2",
-    "pygments": "~0.2.0",
     "mocha": "~1.12.0",
     "expect.js": "~0.2.0"
   },

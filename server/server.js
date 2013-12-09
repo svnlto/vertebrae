@@ -10,7 +10,6 @@ module.exports = function (opts) {
 
   opts = _.extend({
     port :      4444,
-    tests :     true,
     baseDir :   './'
   }, opts || {});
 
