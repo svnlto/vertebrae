@@ -1,3 +1,5 @@
+/*global Handlebars:true */
+
 var Handlebars = require('handlebars');
 
 

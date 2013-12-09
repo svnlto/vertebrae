@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-recess');
   grunt.loadNpmTasks('grunt-groc');
   grunt.loadNpmTasks('grunt-karma');
@@ -17,6 +18,7 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
 
     lintblame: {
       files: [
@@ -29,6 +31,14 @@ module.exports = function (grunt) {
       ],
       options: {
         jshintrc: '.jshintrc'
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          '_dist/<%= pkg.name %>.min.js': ['_dist/js/built.js']
+        }
       }
     },
 
@@ -126,7 +136,7 @@ module.exports = function (grunt) {
   // Default task.
   grunt.registerTask('default', 'lintblame');
 
-  grunt.registerTask('test', ['lintblame', 'karma']);
+  grunt.registerTask('test', ['lintblame']);
   grunt.registerTask('build', ['lintblame', 'karma', 'recess', 'copy', 'requirejs', 'comment_builder']);
   grunt.registerTask('docs', 'groc');
 

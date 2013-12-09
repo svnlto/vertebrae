@@ -1,9 +1,3 @@
-//
-// ## helpers.storage.store
-//
-
-var app = require('../namespace');
-var $ = require('jquery');
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
 

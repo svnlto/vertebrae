@@ -1,4 +1,3 @@
-var app = require('./helpers/namespace');
 var Config = require('./models/config');
 
 require('./helpers/storage/store');

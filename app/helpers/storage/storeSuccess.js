@@ -1,5 +1,3 @@
-var jQuery = require('jquery');
-
 var success = function (e, jqXHR, opts, res) {
 
   'use strict';

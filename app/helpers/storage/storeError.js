@@ -1,5 +1,3 @@
-var jQuery = require('jquery');
-
 var errors = function (e, jqXHR) {
 
   'use strict';
@@ -8,7 +6,7 @@ var errors = function (e, jqXHR) {
   var errorObj = null;
 
   try {
-    errorObj = jQuery.parseJSON(jqXHR.responseText);
+    errorObj = $.parseJSON(jqXHR.responseText);
   }
   catch (e) {}
 

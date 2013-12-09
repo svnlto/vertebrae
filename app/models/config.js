@@ -1,7 +1,3 @@
-//
-//  ## models.config
-//
-//
 var BaseModel = require('../helpers/mvc/model');
 
 var Model = BaseModel.extend({

@@ -1,5 +1,5 @@
-var Backbone = require('backbone');
-var _ = require('lodash');
+
+'use strict';
 
 var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
 

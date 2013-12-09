@@ -1,4 +1,3 @@
-var app = require('../../helpers/namespace');
 var Controller = require('./controllers/index');
 var fs = require('fs');
 

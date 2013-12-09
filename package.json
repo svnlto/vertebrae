@@ -38,7 +38,8 @@
     "expect.js": "~0.2.0",
     "path-browserify": "0.0.0",
     "handlebars": "~1.0.12",
-    "hbsfy": "~1.0.0"
+    "hbsfy": "~1.0.0",
+    "grunt-contrib-uglify": "~0.2.7"
   },
   "scripts": {
     "start": "node bin/server",

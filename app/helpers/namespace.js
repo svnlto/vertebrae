@@ -1,8 +1,5 @@
 'use strict';
-
-var $ = require('jquery');
-var _ = require('underscore');
-var Backbone = require('backbone');
+/*global app:true */
 var Marionette = require('backbone.marionette');
 
 var Router = require('../router');
