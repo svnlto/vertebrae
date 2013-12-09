@@ -1,4 +1,5 @@
 var Controller = require('./controllers/index');
+var app = require('../../helpers/namespace');
 
 app.module('index', function () {
 

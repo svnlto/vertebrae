@@ -1,5 +1,6 @@
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
+var app = require('../namespace');
 
 app.addInitializer(function (config) {
 

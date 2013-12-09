@@ -1,4 +1,5 @@
 var Config = require('./models/config');
+var app = require('./helpers/namespace');
 
 require('./helpers/storage/store');
 require('./helpers/handlebars');

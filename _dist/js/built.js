@@ -4,6 +4,9 @@ var Marionette = require('backbone.marionette');
 var Controller = Marionette.Controller.extend({
 
   initialize: function (options) {
+
+    'use strict';
+
     this.options = options || {};
 
     app.vent.on('route:index', function (id, action) {
@@ -18,6 +21,7 @@ module.exports = Controller;
 
 },{"backbone.marionette":"HrDLe6"}],2:[function(require,module,exports){
 var Controller = require('./controllers/index');
+var app = require('../../helpers/namespace');
 
 app.module('index', function () {
 
@@ -34,12 +38,15 @@ app.module('index', function () {
 
 module.exports = app;
 
-},{"./controllers/index":1}],3:[function(require,module,exports){
+},{"../../helpers/namespace":7,"./controllers/index":1}],3:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 var Controller = Marionette.Controller.extend({
 
   initialize: function (options) {
+
+    'use strict';
+
     this.options = options || {};
 
     // create layout object passing in a template string
@@ -64,15 +71,17 @@ var Controller = Marionette.Controller.extend({
 module.exports = Controller;
 
 },{"backbone.marionette":"HrDLe6"}],4:[function(require,module,exports){
-var app = require('../../helpers/namespace');
 var Controller = require('./controllers/index');
 var fs = require('fs');
+var handlebars = require('handlebars');
+var app = require('../../helpers/namespace');
 
 app.module('layout', function () {
 
   'use strict';
 
   this.addInitializer(function (options) {
+console.log(handlebars)
     options.app.components['vertebrae-layout'].template = "<header> </header>\n<section> </section>\n";
 
     this._controller = new Controller(
@@ -85,7 +94,7 @@ app.module('layout', function () {
 
 module.exports = app;
 
-},{"../../helpers/namespace":7,"./controllers/index":3,"fs":30}],5:[function(require,module,exports){
+},{"../../helpers/namespace":7,"./controllers/index":3,"fs":30,"handlebars":"oqtzWV"}],5:[function(require,module,exports){
 /*global Handlebars:true */
 
 var Handlebars = require('handlebars');
@@ -112,16 +121,22 @@ Handlebars.registerHelper('debug', function (optionalValue) {
 module.exports = Handlebars;
 
 },{"handlebars":"oqtzWV"}],6:[function(require,module,exports){
+var $ = require('jquery');
+var Backbone = require('backbone');
+
 var SuperModel = Backbone.Model.extend({
   idAttribute: 'id'
 });
 
 module.exports = SuperModel;
 
-},{}],7:[function(require,module,exports){
+},{"backbone":"9ifspT","jquery":"SiAe81"}],7:[function(require,module,exports){
 'use strict';
 /*global app:true */
 var Marionette = require('backbone.marionette');
+var $ = require('jquery');
+var _ = require('underscore');
+var Backbone = require('backbone');
 
 var Router = require('../router');
 var app = new Marionette.Application();
@@ -154,9 +169,10 @@ app.on('initialize:after', function () {
 module.exports = app;
 
 
-},{"../router":13,"backbone.marionette":"HrDLe6"}],8:[function(require,module,exports){
+},{"../router":13,"backbone":"9ifspT","backbone.marionette":"HrDLe6","jquery":"SiAe81","underscore":"U/uZw2"}],8:[function(require,module,exports){
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
+var app = require('../namespace');
 
 app.addInitializer(function (config) {
 
@@ -182,7 +198,7 @@ app.addInitializer(function (config) {
 
 module.exports = app;
 
-},{"./storeError":9,"./storeSuccess":10}],9:[function(require,module,exports){
+},{"../namespace":7,"./storeError":9,"./storeSuccess":10}],9:[function(require,module,exports){
 var errors = function (e, jqXHR) {
 
   'use strict';
@@ -225,6 +241,7 @@ module.exports = success;
 
 },{}],11:[function(require,module,exports){
 var Config = require('./models/config');
+var app = require('./helpers/namespace');
 
 require('./helpers/storage/store');
 require('./helpers/handlebars');
@@ -237,7 +254,7 @@ app.start(new Config().toJSON());
 module.exports = app;
 
 
-},{"./components/index/index":2,"./components/vertebrae-layout/index":4,"./helpers/handlebars":5,"./helpers/storage/store":8,"./models/config":12}],12:[function(require,module,exports){
+},{"./components/index/index":2,"./components/vertebrae-layout/index":4,"./helpers/handlebars":5,"./helpers/namespace":7,"./helpers/storage/store":8,"./models/config":12}],12:[function(require,module,exports){
 var BaseModel = require('../helpers/mvc/model');
 
 var Model = BaseModel.extend({
@@ -305,8 +322,6 @@ var Router = Backbone.Router.extend({
 
 module.exports = Router;
 
-},{}],"backbone.babysitter":[function(require,module,exports){
-module.exports=require('FQLjm3');
 },{}],"FQLjm3":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
@@ -473,8 +488,8 @@ Backbone.ChildViewContainer = (function(Backbone, _){
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"backbone":"9ifspT"}],"backbone.marionette":[function(require,module,exports){
-module.exports=require('HrDLe6');
+},{"backbone":"9ifspT"}],"backbone.babysitter":[function(require,module,exports){
+module.exports=require('FQLjm3');
 },{}],"HrDLe6":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
@@ -2815,7 +2830,9 @@ _.extend(Marionette.Module, {
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"backbone":"9ifspT","jquery":"SiAe81","underscore":"U/uZw2"}],"backbone.wreqr":[function(require,module,exports){
+},{"backbone":"9ifspT","jquery":"SiAe81","underscore":"U/uZw2"}],"backbone.marionette":[function(require,module,exports){
+module.exports=require('HrDLe6');
+},{}],"backbone.wreqr":[function(require,module,exports){
 module.exports=require('4wDh2x');
 },{}],"4wDh2x":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
@@ -3092,7 +3109,9 @@ Wreqr.EventAggregator = (function(Backbone, _){
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"backbone":"9ifspT"}],"9ifspT":[function(require,module,exports){
+},{"backbone":"9ifspT"}],"backbone":[function(require,module,exports){
+module.exports=require('9ifspT');
+},{}],"9ifspT":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
 ; global.underscore = require("underscore");
@@ -4672,8 +4691,8 @@ var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? 
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"underscore":"U/uZw2"}],"backbone":[function(require,module,exports){
-module.exports=require('9ifspT');
+},{"underscore":"U/uZw2"}],"handlebars":[function(require,module,exports){
+module.exports=require('oqtzWV');
 },{}],"oqtzWV":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 /*
@@ -6959,8 +6978,6 @@ Handlebars.template = Handlebars.VM.template;
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{}],"handlebars":[function(require,module,exports){
-module.exports=require('oqtzWV');
 },{}],"jquery":[function(require,module,exports){
 module.exports=require('SiAe81');
 },{}],"SiAe81":[function(require,module,exports){

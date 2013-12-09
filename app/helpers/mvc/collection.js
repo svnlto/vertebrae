@@ -1,6 +1,9 @@
 
 'use strict';
 
+var _ = require('underscore');
+var Backbone = require('backbone');
+
 var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
 
   next: function (model) {

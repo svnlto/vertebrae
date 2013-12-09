@@ -1,6 +1,9 @@
 'use strict';
 /*global app:true */
 var Marionette = require('backbone.marionette');
+var $ = require('jquery');
+var _ = require('underscore');
+var Backbone = require('backbone');
 
 var Router = require('../router');
 var app = new Marionette.Application();

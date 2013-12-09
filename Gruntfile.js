@@ -74,7 +74,8 @@ module.exports = function (grunt) {
           standalone: 'app',
           //debug: true,
           transform: [
-            'brfs'
+            'brfs',
+            'hbsfy'
           ],
           shim: {
             jquery: {
