@@ -7,13 +7,13 @@ module.exports = function (grunt) {
   // custom tasks
   grunt.loadTasks('build/tasks/');
 
-  grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-recess');
   grunt.loadNpmTasks('grunt-groc');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-lintblame');
+  grunt.loadNpmTasks('grunt-browserify');
 
   // Project configuration.
   grunt.initConfig({
@@ -24,7 +24,8 @@ module.exports = function (grunt) {
         'karma.conf.js',
         'app/**/*.js',
         'tests/**/*-spec.js',
-        'tests/app/config.js'
+        'tests/app/config.js',
+        'src/**/**/*'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -33,7 +34,7 @@ module.exports = function (grunt) {
 
     watch: {
       files: ['<%= lintblame.files %>', 'assets/less/**/*.less', 'app/**/*.less', '!app/compiled/*'],
-      tasks: ['lintblame', 'karma', 'recess']
+      tasks: ['browserify']
     },
 
     copy: {
@@ -57,94 +58,66 @@ module.exports = function (grunt) {
       }
     },
 
-    requirejs: {
-      production: {
+    browserify: {
+      build: {
         options: {
-          almond: true,
-          replaceRequireScript: [{
-            files: ['prod/app/index.html'],
-            module: 'main',
-            modulePath: 'app/main'
-          }],
-          insertRequire: ['main'],
-          baseUrl: 'app/',
-          optimizeCss: 'none',
-          optimize: 'uglify',
-          uglify: {
-            'beautify': false,
-            'no-dead-code': true,
-            'reserved-names': 'require'
-          },
-          inlineText: true,
-          useStrict: true,
-          findNestedDependencies: true,
-          optimizeAllPluginResources: true,
-          paths: {
-            lib:           '../lib/',
-            text:          '../lib/requirejs-text/text',
-            hbs:           '../lib/backbone.marionette.hbs/backbone.marionette.hbs',
-            jquery:        '../lib/jquery/jquery',
-            handlebars:    '../lib/handlebars/handlebars',
-            lodash:        '../lib/lodash/dist/lodash',
-            backbone:      '../lib/backbone/backbone',
-            marionette:    '../lib/backbone.marionette/lib/backbone.marionette',
-            unique:        '../lib/backbone.uniquemodel/backbone.uniquemodel',
-            localStorage:  '../lib/backbone.localStorage/backbone.localStorage',
-            q:             '../lib/q/q',
-            cocktail:      '../lib/cocktail/Cocktail'
-          },
-
+          standalone: 'app',
+          //debug: true,
+          transform: [
+            'brfs'
+          ],
           shim: {
-            'backbone': {
-              deps: ['lodash', 'jquery'],
-              exports: 'Backbone'
+            jquery: {
+              path: 'lib/jquery/jquery.js',
+              exports: '$'
             },
-
-            'marionette': {
-              deps: ['backbone'],
-              exports: 'Backbone.Marionette'
+            lodash: {
+              path: 'lib/lodash/dist/lodash.js',
+              exports: '_'
             },
-
-            'localStorage': {
-              deps: ['backbone'],
-              exports: 'Backbone.LocalStorage'
+            underscore: {
+              path: 'lib/underscore/underscore.js',
+              exports: '_'
             },
-
-            'uniquemodel': {
-              deps: ['backbone'],
-              exports: 'Backbone.UniqueModel'
-            },
-
-            'handlebars': {
+            handlebars: {
+              path: 'lib/handlebars/handlebars.js',
               exports: 'Handlebars'
+            },
+            backbone: {
+              path: 'lib/backbone/backbone.js',
+              exports: 'Backbone',
+              depends: {
+                underscore: 'underscore'
+              }
+            },
+            'backbone.babysitter': {
+              path: 'lib/backbone.babysitter/lib/backbone.babysitter.js',
+              exports: 'Backbone.Babysitter',
+              depends: {
+                backbone: 'Backbone'
+              }
+            },
+            'backbone.wreqr': {
+              path: 'lib/backbone.wreqr/lib/backbone.wreqr.js',
+              exports: 'Backbone.Wreqr',
+              depends: {
+                backbone: 'Backbone'
+              }
+            },
+            'backbone.marionette': {
+              path: 'lib/backbone.marionette/lib/backbone.marionette.js',
+              exports: 'Marionette',
+              depends: {
+                jquery: '$',
+                backbone: 'Backbone',
+                underscore: '_'
+              }
             }
+          }
+        },
 
-          },
-          out: 'prod/app/main.js',
-          name: 'main'
-        }
-      }
-    },
-
-    comment_builder: {
-      options: {
-        src: 'prod/app/index.html'
-      }
-    },
-
-    groc: {
-      javascript: [
-        'app/**/*.js'
-      ],
-      options: {
-        'out': 'docs/',
-        'whitespace-after-token': false
-      }
-    },
-
-    karma: {
-      'default': {
-        configFile: 'karma.conf.js'
+        src: ['app/main.js'],
+        dest: '_dist/js/built.js'
       }
     }
 

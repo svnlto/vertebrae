@@ -2,34 +2,31 @@
 // ## helpers.storage.store
 //
 
-define([
-  'helpers/namespace',
-  'helpers/storage/storeError',
-  'helpers/storage/storeSuccess'
-],
+var app = require('../namespace');
+var $ = require('jquery');
+var storeError = require('./storeError');
+var storeSuccess = require('./storeSuccess');
 
-function (app, storeError, storeSuccess) {
+app.addInitializer(function (config) {
 
   'use strict';
 
-  app.addInitializer(function (config) {
-
-    $.ajaxSetup({
-      cache : config.ajaxCache,
-      timeout: config.ajaxTimeout
-    });
-
-    $(document).ajaxStart(function () {
-      app.vent.trigger('ajax:start');
-    });
-
-    $(document).ajaxStop(function () {
-      app.vent.trigger('ajax:stop');
-    });
-
-    $(document).ajaxError(storeError);
-    $(document).ajaxSuccess(storeSuccess);
-
+  $.ajaxSetup({
+    cache : config.ajaxCache,
+    timeout: config.ajaxTimeout
   });
 
+  $(document).ajaxStart(function () {
+    app.vent.trigger('ajax:start');
+  });
+
+  $(document).ajaxStop(function () {
+    app.vent.trigger('ajax:stop');
+  });
+
+  $(document).ajaxError(storeError);
+  $(document).ajaxSuccess(storeSuccess);
+
 });
+
+module.exports = app;

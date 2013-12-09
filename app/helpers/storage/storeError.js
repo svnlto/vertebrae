@@ -1,27 +1,22 @@
-//
-//  helpers.storage.storeError
-//
+var jQuery = require('jquery');
 
-define(function () {
+var errors = function (e, jqXHR) {
 
   'use strict';
 
-  var errors = function (e, jqXHR) {
-    var statusCode = jqXHR.status + '';
-    var errorObj = null;
+  var statusCode = jqXHR.status + '';
+  var errorObj = null;
 
-    try {
-      errorObj = jQuery.parseJSON(jqXHR.responseText);
-    }
-    catch (e) {}
+  try {
+    errorObj = jQuery.parseJSON(jqXHR.responseText);
+  }
+  catch (e) {}
 
-    var errors = {
-      'default' : function () { }
-    };
-
-    (errors[statusCode] ? errors[statusCode] : errors['default'])();
+  var errors = {
+    'default' : function () { }
   };
 
-  return errors;
+  (errors[statusCode] ? errors[statusCode] : errors['default'])();
+};
 
-});
+module.exports = errors;

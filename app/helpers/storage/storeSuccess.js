@@ -1,24 +1,19 @@
-//
-// helpers.storage.storeSuccess
-//
+var jQuery = require('jquery');
 
-define(function () {
+var success = function (e, jqXHR, opts, res) {
 
   'use strict';
 
-  var success = function (e, jqXHR, opts, res) {
-    var statusCode = jqXHR.status + '';
+  var statusCode = jqXHR.status + '';
 
-    var success = {
-      'default' : function () {
-        console.log('SUCCESS', /* jqXHR ,*/ res);
-      }
-    };
-
-    (success[statusCode] ? success[statusCode] : success['default'])();
-
+  var success = {
+    'default' : function () {
+      console.log('SUCCESS', /* jqXHR ,*/ res);
+    }
   };
 
-  return success;
+  (success[statusCode] ? success[statusCode] : success['default'])();
 
-});
+};
+
+module.exports = success;

@@ -1,30 +1,20 @@
-define([
-  'backbone'
-],
+'use strict';
 
-function (Backbone) {
+var Backbone = require('backbone');
 
-  'use strict';
+var Router = Backbone.Router.extend({
 
-  return Backbone.Router.extend({
+  routes: {
+    'index'                 : 'index',
+    'index/:id'             : 'index',
+    'index/:id/:action'     : 'index',
+    '*defaults'                      : 'index'
+  },
 
-    initialize: function () {
-      require(['components/app/index']);
-    },
-
-    routes: {
-      'index'                 : 'index',
-      'index/:id'             : 'index',
-      'index/:id/:action'     : 'index',
-      ''                      : 'index'
-    },
-
-    index: function (id, action) {
-      require(['components/index/index'], function () {
-        app.vent.trigger('route:index', id, action);
-      });
-    }
-
-  });
+  index: function (id, action) {
+    app.vent.trigger('route:index', id, action);
+  }
 
 });
+
+module.exports = Router;

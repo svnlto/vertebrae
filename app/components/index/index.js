@@ -1,30 +1,17 @@
-//
-// # index.index
-//
+var app = require('../../helpers/namespace');
+var Controller = require('./controllers/index');
 
-define([
-  'helpers/namespace',
-  'marionette',
-  './controllers/index'
-],
-
-function (app, Marionette, AppController) {
+app.module('index', function () {
 
   'use strict';
 
-  app.module('index', function () {
-
-    //
-    // module lifecycle
-    //
-    this.addInitializer(function (options) {
-      this._controller = new AppController(options);
-
-      app.vent.on('route:index', function (a, b) {
-        this._controller.index(a, b);
-      }, this);
-    });
+  this.addInitializer(function (options) {
+    this._controller = new Controller(
+      options.app.components['vertebrae-layout']
+    );
 
   });
 
 });
+
+module.exports = app;

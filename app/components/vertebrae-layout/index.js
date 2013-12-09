@@ -1,24 +1,20 @@
-//
-// # layout.index
-//
+var app = require('../../helpers/namespace');
+var Controller = require('./controllers/index');
+var fs = require('fs');
 
-define([
-  'helpers/namespace',
-  './controllers/index'
-],
-
-function (app, LayoutController) {
+app.module('layout', function () {
 
   'use strict';
 
-  return app.module('layout', function () {
+  this.addInitializer(function (options) {
+    options.app.components['vertebrae-layout'].template = fs.readFileSync(__dirname + '/templates/index.html');
 
-    this.addInitializer(function (options) {
-      this._controller = new LayoutController(
-        options.app.components['vertebrae-layout']
-      );
-    });
+    this._controller = new Controller(
+      options.app.components['vertebrae-layout']
+    );
 
   });
 
 });
+
+module.exports = app;

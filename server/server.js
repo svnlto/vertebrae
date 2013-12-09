@@ -14,7 +14,7 @@ module.exports = function (opts) {
   }, opts || {});
 
   app.configure(function () {
-    ['app', 'lib', 'assets'].forEach(function (dir) {
+    ['app', 'lib', 'assets', '_dist'].forEach(function (dir) {
       app.use(express.compress());
       app.use('/' + dir, staticDir(opts.baseDir + dir));
     });
@@ -22,7 +22,7 @@ module.exports = function (opts) {
   });
 
   app.get('/', function (req, res) {
-    fs.createReadStream(opts.baseDir + 'app/index.html').pipe(res);
+    fs.createReadStream(opts.baseDir + '_dist/index.html').pipe(res);
   });
 
   // Actually listen

@@ -1,26 +1,17 @@
-//
-// # components.index.controllers.index
-//
+var app = require('../../../helpers/namespace');
+var Marionette = require('backbone.marionette');
 
-define([
-  'helpers/namespace',
-  'marionette'
-],
+var Controller = Marionette.Controller.extend({
 
-function (app, Marionette) {
+  initialize: function (options) {
+    this.options = options || {};
 
-  'use strict';
+    app.vent.on('route:index', function (id, action) {
+      console.log(id, action);
+    });
 
-  return Marionette.Controller.extend({
-
-    initialize: function (options) {
-      this.options = options || {};
-    },
-
-    index: function (data) {
-      console.log('index route', data);
-    }
-
-  });
+  }
 
 });
+
+module.exports = Controller;

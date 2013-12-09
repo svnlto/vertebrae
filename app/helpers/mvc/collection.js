@@ -1,38 +1,17 @@
-//
-// ## helpers.mvc.collection
-//
+var Backbone = require('backbone');
+var _ = require('lodash');
 
-// extends default Backbone Collection with some helpful methods
-//
-// Available methods are:
-//
-// ```
-// collection.next(model)
-// collection.prev(model)
-// ```
+var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
 
-define([
-  'lodash',
-  'backbone'
-],
+  next: function (model) {
+    return this.at((this.indexOf(model) + 1) % _.size(this));
+  },
 
-function (_, Backbone) {
-
-  'use strict';
-
-  var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
-
-    next: function (model) {
-      return this.at((this.indexOf(model) + 1) % _.size(this));
-    },
-
-    prev: function (model) {
-      var index = this.indexOf(model) - 1;
-      return this.at(index > -1 ? index : _.size(this) - 1);
-    }
-
-  });
-
-  return SuperCollection;
+  prev: function (model) {
+    var index = this.indexOf(model) - 1;
+    return this.at(index > -1 ? index : _.size(this) - 1);
+  }
 
 });
+
+module.exports = SuperCollection;

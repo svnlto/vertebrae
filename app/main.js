@@ -1,19 +1,13 @@
-//
-// # main
-//
+var app = require('./helpers/namespace');
+var Config = require('./models/config');
 
-define([
-  'helpers/namespace',
-  'models/config',
-  'helpers/storage/store',
-  'helpers/handlebars'
-],
+require('./helpers/storage/store');
+require('./helpers/handlebars');
 
-function (app, Config) {
+require('./components/vertebrae-layout/index');
+require('./components/index/index');
 
-  'use strict';
+app.start(new Config().toJSON());
 
-  app.start(new Config().toJSON());
-
-});
+module.exports = app;
 

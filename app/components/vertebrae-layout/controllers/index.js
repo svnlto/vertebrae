@@ -1,68 +1,28 @@
-//
-// # controllers.layout
-//
+var app = require('../../../helpers/namespace');
+var Marionette = require('backbone.marionette');
 
-define([
-  'helpers/namespace',
-  'marionette',
-  'lodash',
-  'backbone',
-  'q'
-],
+var Controller = Marionette.Controller.extend({
 
-function (app, Marionette, _, Backbone, Q) {
+  initialize: function (options) {
+    this.options = options || {};
 
-  'use strict';
+    // create layout object passing in a template string
+    var Layout = Marionette.Layout.extend({
+      template:  function () {
+        return options.template;
+      }
+    });
 
-  return Marionette.Controller.extend({
+    // assign a region to the documents container
+    this.container = new Backbone.Marionette.Region({
+      el: '#content'
+    });
 
-    initialize: function (options) {
-      this.options = options || {};
-      this.layout = options.config.template || 'components/vertebrae-layout/templates/index';
+    // bind layout to container element
+    this.container.show(new Layout());
 
-      // wait till promises have been resolved, then execute
-      this._addLayout().then(function () {
-        app.vent.trigger('layout:ready');
-      }).fail(function (err) {
-        throw new Error(err);
-      });
-
-    },
-
-    _addLayout: function () {
-      var dfd = Q.defer();
-
-      // require layout
-      require(['hbs!' + this.layout], _.bind(function (layout) {
-
-        try {
-
-          // create layout object passing in a template string
-          var Layout = Marionette.Layout.extend({
-            template: layout
-          });
-
-          // assign a region to the documents container
-          this.container = new Backbone.Marionette.Region({
-            el: '#content'
-          });
-
-          // bind layout to container element
-          this.container.show(new Layout());
-
-          if (this.container instanceof Marionette.Region) {
-            dfd.resolve();
-          }
-
-        } catch (err) {
-          dfd.reject(err);
-        }
-
-      }, this));
-
-      return dfd.promise;
-    }
-
-  });
+  }
 
 });
+
+module.exports = Controller;

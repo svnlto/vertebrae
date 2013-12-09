@@ -1,28 +1,22 @@
-//
-// ## helpers/config
-//
+var Handlebars = require('handlebars');
 
-define([
-  'handlebars'
-],
 
-function (Handlebars) {
+//
+// place {{ debug }}
+//
+Handlebars.registerHelper('debug', function (optionalValue) {
 
   'use strict';
 
-  //
-  // place {{ debug }}
-  //
-  Handlebars.registerHelper('debug', function (optionalValue) {
-    console.log('Current Context');
+  console.log('Current Context');
+  console.log('====================');
+  console.log(this);
+
+  if (optionalValue) {
+    console.log('Value');
     console.log('====================');
-    console.log(this);
-
-    if (optionalValue) {
-      console.log('Value');
-      console.log('====================');
-      console.log(optionalValue);
-    }
-  });
-
+    console.log(optionalValue);
+  }
 });
+
+module.exports = Handlebars;
