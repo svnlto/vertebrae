@@ -12,6 +12,10 @@ app.on('initialize:before', function (options) {
 
   // create router instance
   app.router = new Router();
+
+  // create layout manager
+  app.rm = new Marionette.RegionManager();
+
   //
   // log to console in debug mode
   if (options.debug) {

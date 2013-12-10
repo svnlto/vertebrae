@@ -1,17 +1,33 @@
 !function(e){"object"==typeof exports?module.exports=e():"function"==typeof define&&define.amd?define(e):"undefined"!=typeof window?window.app=e():"undefined"!=typeof global?global.app=e():"undefined"!=typeof self&&(self.app=e())}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
+var Backbone = require('backbone');
+var View = require('../views/index');
 
 var Controller = Marionette.Controller.extend({
 
   initialize: function (options) {
 
-    'use strict';
-
+    var self = this;
     this.options = options || {};
 
     app.vent.on('route:index', function (id, action) {
       console.log(id, action);
+      self.view();
     });
+
+  },
+
+  view: function () {
+
+    'use strict';
+
+    var view = new View({
+      model: new Backbone.Model({
+        name: 'test'
+      })
+    });
+
+    app.regions.section.show(view);
 
   }
 
@@ -19,7 +35,7 @@ var Controller = Marionette.Controller.extend({
 
 module.exports = Controller;
 
-},{"backbone.marionette":"HrDLe6"}],2:[function(require,module,exports){
+},{"../views/index":3,"backbone":"9ifspT","backbone.marionette":"HrDLe6"}],2:[function(require,module,exports){
 var Controller = require('./controllers/index');
 var app = require('../../helpers/namespace');
 
@@ -29,7 +45,7 @@ app.module('index', function () {
 
   this.addInitializer(function (options) {
     this._controller = new Controller(
-      options.app.components['vertebrae-layout']
+      options.app.components.index
     );
 
   });
@@ -38,7 +54,23 @@ app.module('index', function () {
 
 module.exports = app;
 
-},{"../../helpers/namespace":7,"./controllers/index":1}],3:[function(require,module,exports){
+},{"../../helpers/namespace":9,"./controllers/index":1}],3:[function(require,module,exports){
+var app = require('../../../helpers/namespace');
+var Marionette = require('backbone.marionette');
+var Handlebars = require('handlebars');
+
+require('../../../helpers/handlebars')
+
+var fs = require('fs');
+var tmpl = "{{debug}}<h1>{{name}}</h1>\n";
+
+var View = Marionette.ItemView.extend({
+  template: Handlebars.compile(tmpl, this)
+});
+
+module.exports = View;
+
+},{"../../../helpers/handlebars":7,"../../../helpers/namespace":9,"backbone.marionette":"HrDLe6","fs":32,"handlebars":"oqtzWV"}],4:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 var Controller = Marionette.Controller.extend({
@@ -70,10 +102,9 @@ var Controller = Marionette.Controller.extend({
 
 module.exports = Controller;
 
-},{"backbone.marionette":"HrDLe6"}],4:[function(require,module,exports){
+},{"backbone.marionette":"HrDLe6"}],5:[function(require,module,exports){
 var Controller = require('./controllers/index');
 var fs = require('fs');
-var handlebars = require('handlebars');
 var app = require('../../helpers/namespace');
 
 app.module('layout', function () {
@@ -81,7 +112,6 @@ app.module('layout', function () {
   'use strict';
 
   this.addInitializer(function (options) {
-console.log(handlebars)
     options.app.components['vertebrae-layout'].template = "<header> </header>\n<section> </section>\n";
 
     this._controller = new Controller(
@@ -94,7 +124,25 @@ console.log(handlebars)
 
 module.exports = app;
 
-},{"../../helpers/namespace":7,"./controllers/index":3,"fs":30,"handlebars":"oqtzWV"}],5:[function(require,module,exports){
+},{"../../helpers/namespace":9,"./controllers/index":4,"fs":32}],6:[function(require,module,exports){
+var app = require('../../helpers/namespace');
+
+app.module('vertebrae', function () {
+
+  'use strict';
+
+  this.addInitializer(function () {
+    app.regions = app.rm.addRegions({
+      header: 'header',
+      section: 'section'
+    });
+  });
+
+});
+
+module.exports = app;
+
+},{"../../helpers/namespace":9}],7:[function(require,module,exports){
 /*global Handlebars:true */
 
 var Handlebars = require('handlebars');
@@ -120,7 +168,7 @@ Handlebars.registerHelper('debug', function (optionalValue) {
 
 module.exports = Handlebars;
 
-},{"handlebars":"oqtzWV"}],6:[function(require,module,exports){
+},{"handlebars":"oqtzWV"}],8:[function(require,module,exports){
 var $ = require('jquery');
 var Backbone = require('backbone');
 
@@ -130,7 +178,7 @@ var SuperModel = Backbone.Model.extend({
 
 module.exports = SuperModel;
 
-},{"backbone":"9ifspT","jquery":"SiAe81"}],7:[function(require,module,exports){
+},{"backbone":"9ifspT","jquery":"SiAe81"}],9:[function(require,module,exports){
 'use strict';
 /*global app:true */
 var Marionette = require('backbone.marionette');
@@ -145,6 +193,10 @@ app.on('initialize:before', function (options) {
 
   // create router instance
   app.router = new Router();
+
+  // create layout manager
+  app.rm = new Marionette.RegionManager();
+
   //
   // log to console in debug mode
   if (options.debug) {
@@ -169,7 +221,7 @@ app.on('initialize:after', function () {
 module.exports = app;
 
 
-},{"../router":13,"backbone":"9ifspT","backbone.marionette":"HrDLe6","jquery":"SiAe81","underscore":"U/uZw2"}],8:[function(require,module,exports){
+},{"../router":15,"backbone":"9ifspT","backbone.marionette":"HrDLe6","jquery":"SiAe81","underscore":"U/uZw2"}],10:[function(require,module,exports){
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
 var app = require('../namespace');
@@ -198,7 +250,7 @@ app.addInitializer(function (config) {
 
 module.exports = app;
 
-},{"../namespace":7,"./storeError":9,"./storeSuccess":10}],9:[function(require,module,exports){
+},{"../namespace":9,"./storeError":11,"./storeSuccess":12}],11:[function(require,module,exports){
 var errors = function (e, jqXHR) {
 
   'use strict';
@@ -220,7 +272,7 @@ var errors = function (e, jqXHR) {
 
 module.exports = errors;
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var success = function (e, jqXHR, opts, res) {
 
   'use strict';
@@ -239,13 +291,14 @@ var success = function (e, jqXHR, opts, res) {
 
 module.exports = success;
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var Config = require('./models/config');
 var app = require('./helpers/namespace');
 
 require('./helpers/storage/store');
 require('./helpers/handlebars');
 
+require('./components/vertebrae/index');
 require('./components/vertebrae-layout/index');
 require('./components/index/index');
 
@@ -254,7 +307,7 @@ app.start(new Config().toJSON());
 module.exports = app;
 
 
-},{"./components/index/index":2,"./components/vertebrae-layout/index":4,"./helpers/handlebars":5,"./helpers/namespace":7,"./helpers/storage/store":8,"./models/config":12}],12:[function(require,module,exports){
+},{"./components/index/index":2,"./components/vertebrae-layout/index":5,"./components/vertebrae/index":6,"./helpers/handlebars":7,"./helpers/namespace":9,"./helpers/storage/store":10,"./models/config":14}],14:[function(require,module,exports){
 var BaseModel = require('../helpers/mvc/model');
 
 var Model = BaseModel.extend({
@@ -302,7 +355,7 @@ var Model = BaseModel.extend({
 
 module.exports = Model;
 
-},{"../helpers/mvc/model":6}],13:[function(require,module,exports){
+},{"../helpers/mvc/model":8}],15:[function(require,module,exports){
 'use strict';
 
 var Router = Backbone.Router.extend({
@@ -3109,9 +3162,7 @@ Wreqr.EventAggregator = (function(Backbone, _){
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"backbone":"9ifspT"}],"backbone":[function(require,module,exports){
-module.exports=require('9ifspT');
-},{}],"9ifspT":[function(require,module,exports){
+},{"backbone":"9ifspT"}],"9ifspT":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
 ; global.underscore = require("underscore");
@@ -4691,7 +4742,9 @@ var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? 
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"underscore":"U/uZw2"}],"handlebars":[function(require,module,exports){
+},{"underscore":"U/uZw2"}],"backbone":[function(require,module,exports){
+module.exports=require('9ifspT');
+},{}],"handlebars":[function(require,module,exports){
 module.exports=require('oqtzWV');
 },{}],"oqtzWV":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
@@ -15816,6 +15869,8 @@ if ( typeof window === "object" && typeof window.document === "object" ) {
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
+},{}],"lodash":[function(require,module,exports){
+module.exports=require('uhaFmq');
 },{}],"uhaFmq":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 /**
@@ -22148,8 +22203,6 @@ var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? 
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{}],"lodash":[function(require,module,exports){
-module.exports=require('uhaFmq');
 },{}],"underscore":[function(require,module,exports){
 module.exports=require('U/uZw2');
 },{}],"U/uZw2":[function(require,module,exports){
@@ -23385,13 +23438,13 @@ var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? 
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 
 // not implemented
 // The reason for having an empty file and not throwing is to allow
 // untraditional implementation of this module.
 
-},{}]},{},[11])
-(11)
+},{}]},{},[13])
+(13)
 });
 ;

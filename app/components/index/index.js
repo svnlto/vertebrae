@@ -7,7 +7,7 @@ app.module('index', function () {
 
   this.addInitializer(function (options) {
     this._controller = new Controller(
-      options.app.components['vertebrae-layout']
+      options.app.components.index
     );
 
   });
