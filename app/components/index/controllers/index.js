@@ -5,24 +5,18 @@ var View = require('../views/index');
 var Controller = Marionette.Controller.extend({
 
   initialize: function (options) {
-
-    var self = this;
     this.options = options || {};
-
-    app.vent.on('route:index', function (id, action) {
-      console.log(id, action);
-      self.view();
-    });
-
   },
 
-  view: function () {
+  view: function (id, action) {
 
     'use strict';
 
     var view = new View({
       model: new Backbone.Model({
-        name: 'test'
+        name: 'test',
+        id: id,
+        action: action
       })
     });
 

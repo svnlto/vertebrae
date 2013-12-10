@@ -12,6 +12,15 @@ app.module('index', function () {
 
   });
 
+  this.on('before:start', function () {
+    var self = this;
+
+    app.vent.on('route:index', function (id, action) {
+      self._controller.view(id, action);
+    });
+
+  });
+
 });
 
 module.exports = app;

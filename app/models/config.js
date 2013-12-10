@@ -12,7 +12,7 @@ var Model = BaseModel.extend({
             template: null
           }
         },
-        'app': {
+        'vertebrae': {
           config: { }
         },
 
