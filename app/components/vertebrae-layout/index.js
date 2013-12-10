@@ -1,3 +1,4 @@
+/*jshint -W079 */
 var Controller = require('./controllers/index');
 var fs = require('fs');
 var app = require('../../helpers/namespace');

@@ -1,3 +1,4 @@
+/*jshint -W079 */
 var Config = require('./models/config');
 var app = require('./helpers/namespace');
 

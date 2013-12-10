@@ -1,3 +1,4 @@
+/*jshint -W079 */
 var app = require('../../helpers/namespace');
 
 app.module('vertebrae', function () {

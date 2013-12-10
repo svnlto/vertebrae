@@ -1,39 +1,39 @@
 !function(e){"object"==typeof exports?module.exports=e():"function"==typeof define&&define.amd?define(e):"undefined"!=typeof window?window.app=e():"undefined"!=typeof global?global.app=e():"undefined"!=typeof self&&(self.app=e())}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*jshint -W079 */
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var View = require('../views/index');
 
-var Controller = Marionette.Controller.extend({
+module.exports = (function () {
 
-  initialize: function (options) {
+  'use strict';
 
-    var self = this;
-    this.options = options || {};
+  var Controller = Marionette.Controller.extend({
 
-    app.vent.on('route:index', function (id, action) {
-      console.log(id, action);
-      self.view();
-    });
+    initialize: function (options) {
+      this.options = options || {};
+    },
 
-  },
+    view: function (id, action) {
 
-  view: function () {
+      var view = new View({
+        model: new Backbone.Model({
+          name: 'test',
+          id: id,
+          action: action
+        })
+      });
 
-    'use strict';
+      app.regions.section.show(view);
 
-    var view = new View({
-      model: new Backbone.Model({
-        name: 'test'
-      })
-    });
+    }
 
-    app.regions.section.show(view);
+  });
 
-  }
+  return Controller;
 
-});
+}());
 
-module.exports = Controller;
 
 },{"../views/index":3,"backbone":"9ifspT","backbone.marionette":"HrDLe6"}],2:[function(require,module,exports){
 var Controller = require('./controllers/index');
@@ -50,19 +50,29 @@ app.module('index', function () {
 
   });
 
+  this.on('before:start', function () {
+    var self = this;
+
+    app.vent.on('route:index', function (id, action) {
+      self._controller.view(id, action);
+    });
+
+  });
+
 });
 
 module.exports = app;
 
 },{"../../helpers/namespace":9,"./controllers/index":1}],3:[function(require,module,exports){
-var app = require('../../../helpers/namespace');
+/*jshint -W079 */
 var Marionette = require('backbone.marionette');
+
 var Handlebars = require('handlebars');
 
-require('../../../helpers/handlebars')
+require('../../../helpers/handlebars');
 
 var fs = require('fs');
-var tmpl = "{{debug}}<h1>{{name}}</h1>\n";
+var tmpl = "{{debug}}\n\n<h1>{{name}}</h1>\n\n{{#if id}}\n<b>ID:</b> {{id}}\n{{/if}}\n\n{{#if action}}\n<b>Action:</b> {{action}}\n{{/if}}\n";
 
 var View = Marionette.ItemView.extend({
   template: Handlebars.compile(tmpl, this)
@@ -70,7 +80,7 @@ var View = Marionette.ItemView.extend({
 
 module.exports = View;
 
-},{"../../../helpers/handlebars":7,"../../../helpers/namespace":9,"backbone.marionette":"HrDLe6","fs":32,"handlebars":"oqtzWV"}],4:[function(require,module,exports){
+},{"../../../helpers/handlebars":7,"backbone.marionette":"HrDLe6","fs":32,"handlebars":"oqtzWV"}],4:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 var Controller = Marionette.Controller.extend({
@@ -103,6 +113,7 @@ var Controller = Marionette.Controller.extend({
 module.exports = Controller;
 
 },{"backbone.marionette":"HrDLe6"}],5:[function(require,module,exports){
+/*jshint -W079 */
 var Controller = require('./controllers/index');
 var fs = require('fs');
 var app = require('../../helpers/namespace');
@@ -125,6 +136,7 @@ app.module('layout', function () {
 module.exports = app;
 
 },{"../../helpers/namespace":9,"./controllers/index":4,"fs":32}],6:[function(require,module,exports){
+/*jshint -W079 */
 var app = require('../../helpers/namespace');
 
 app.module('vertebrae', function () {
@@ -169,6 +181,7 @@ Handlebars.registerHelper('debug', function (optionalValue) {
 module.exports = Handlebars;
 
 },{"handlebars":"oqtzWV"}],8:[function(require,module,exports){
+/*jshint -W079, -W098 */
 var $ = require('jquery');
 var Backbone = require('backbone');
 
@@ -179,11 +192,9 @@ var SuperModel = Backbone.Model.extend({
 module.exports = SuperModel;
 
 },{"backbone":"9ifspT","jquery":"SiAe81"}],9:[function(require,module,exports){
+/*jshint -W079 */
 'use strict';
-/*global app:true */
 var Marionette = require('backbone.marionette');
-var $ = require('jquery');
-var _ = require('underscore');
 var Backbone = require('backbone');
 
 var Router = require('../router');
@@ -221,7 +232,7 @@ app.on('initialize:after', function () {
 module.exports = app;
 
 
-},{"../router":15,"backbone":"9ifspT","backbone.marionette":"HrDLe6","jquery":"SiAe81","underscore":"U/uZw2"}],10:[function(require,module,exports){
+},{"../router":15,"backbone":"9ifspT","backbone.marionette":"HrDLe6"}],10:[function(require,module,exports){
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
 var app = require('../namespace');
@@ -292,6 +303,7 @@ var success = function (e, jqXHR, opts, res) {
 module.exports = success;
 
 },{}],13:[function(require,module,exports){
+/*jshint -W079 */
 var Config = require('./models/config');
 var app = require('./helpers/namespace');
 
@@ -322,7 +334,7 @@ var Model = BaseModel.extend({
             template: null
           }
         },
-        'app': {
+        'vertebrae': {
           config: { }
         },
 
@@ -375,6 +387,8 @@ var Router = Backbone.Router.extend({
 
 module.exports = Router;
 
+},{}],"backbone.babysitter":[function(require,module,exports){
+module.exports=require('FQLjm3');
 },{}],"FQLjm3":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
@@ -541,9 +555,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
 
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
-},{"backbone":"9ifspT"}],"backbone.babysitter":[function(require,module,exports){
-module.exports=require('FQLjm3');
-},{}],"HrDLe6":[function(require,module,exports){
+},{"backbone":"9ifspT"}],"HrDLe6":[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};(function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
 ; global.$ = require("jquery");

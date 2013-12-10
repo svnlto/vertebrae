@@ -1,14 +1,8 @@
-define(function () {
+var response = {
+  GET: [ ],
+  POST: { },
+  PUT: { }
+};
 
-  'use strict';
+module.exports = response;
 
-  var response = {
-    GET: [ ],
-    POST: { },
-    PUT: { }
-  };
-
-  return response;
-
-
-});

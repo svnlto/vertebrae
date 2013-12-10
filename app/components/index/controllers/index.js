@@ -1,29 +1,35 @@
+/*jshint -W079 */
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var View = require('../views/index');
 
-var Controller = Marionette.Controller.extend({
+module.exports = (function () {
 
-  initialize: function (options) {
-    this.options = options || {};
-  },
+  'use strict';
 
-  view: function (id, action) {
+  var Controller = Marionette.Controller.extend({
 
-    'use strict';
+    initialize: function (options) {
+      this.options = options || {};
+    },
 
-    var view = new View({
-      model: new Backbone.Model({
-        name: 'test',
-        id: id,
-        action: action
-      })
-    });
+    view: function (id, action) {
 
-    app.regions.section.show(view);
+      var view = new View({
+        model: new Backbone.Model({
+          name: 'test',
+          id: id,
+          action: action
+        })
+      });
 
-  }
+      app.regions.section.show(view);
 
-});
+    }
 
-module.exports = Controller;
+  });
+
+  return Controller;
+
+}());
+

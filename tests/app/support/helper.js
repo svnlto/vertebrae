@@ -1,6 +1,19 @@
-window.mocha.setup({globals: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval']});
+window.mocha.setup({
+  globals: [
+    'setTimeout',
+    'clearTimeout',
+    'setInterval',
+    'clearInterval'
+  ]
+});
 
-module.exports = (function() {
+var Marionette = require('backbone.marionette');
+var Config = require('../../../app/models/config');
+var fixture = require('../fixtures/test');
+
+module.exports = (function () {
+
+  'use strict';
 
   var app = new Marionette.Application();
   var config = new Config().toJSON();
@@ -14,7 +27,6 @@ module.exports = (function() {
   before(function () {
 
     before(function () {
-      this.FIXTURES = require('../fixtures/');
     });
 
   });
