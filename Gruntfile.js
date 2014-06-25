@@ -1,143 +1,126 @@
 /*global module:false*/
+var shims = require('./config/shims');
+var sharedModules = Object.keys(shims).concat([
+  // place all modules you want in the lib build here
+]);
 
 module.exports = function (grunt) {
 
   'use strict';
 
-  // custom tasks
-  grunt.loadTasks('build/tasks/');
-
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-recess');
-  grunt.loadNpmTasks('grunt-groc');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-lintblame');
-  grunt.loadNpmTasks('grunt-browserify');
-
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
 
-    lintblame: {
+    pkg: require('./package.json'),
+    cfg: {},
+
+    jshint: {
       files: [
         'Gruntfile.js',
-        'karma.conf.js',
-        'app/**/*.js',
-        'tests/**/*-spec.js',
-        'tests/app/config.js',
-        'src/**/**/*'
+        'www/app/**/**/*.js'
       ],
       options: {
         jshintrc: '.jshintrc'
       }
     },
 
-    uglify: {
-      dist: {
-        files: {
-          '_dist/<%= pkg.name %>.min.js': ['_dist/js/built.js']
-        }
-      }
-    },
-
     watch: {
-      files: ['<%= lintblame.files %>', 'assets/less/**/*.less', 'app/**/*.less', '!app/compiled/*'],
-      tasks: ['browserify']
+      files: [
+        '<%= jshint.files %>',
+        'www/app/**/*.html'
+      ],
+      tasks: ['jshint', 'browserify']
     },
 
-    copy: {
-      dist: {
-        files: {
-          'prod/app/index.html': 'app/index.html',
-          'prod/': ['assets/images/*', 'assets/css/*']
-        }
-      }
-    },
-
-    recess: {
-      white: {
+    connect: {
+      server: {
         options: {
-          compile: true,
-          compress: true
+          port: 9000,
+          base: 'www',
+          hostname: '0.0.0.0',
+          middleware: function (connect, options) {
+            return [
+              connect.static(options.base),
+              connect.directory(options.base)
+            ];
+          }
         },
-        files: {
-          'assets/css/app.css' : ['assets/less/themes/app.less']
-        }
       }
     },
 
     browserify: {
-      build: {
-        options: {
-          standalone: 'app',
-          //debug: true,
-          transform: [
-            'brfs'
-          ],
-          shim: {
-            jquery: {
-              path: 'lib/jquery/jquery.js',
-              exports: '$'
-            },
-            lodash: {
-              path: 'lib/lodash/dist/lodash.js',
-              exports: '_'
-            },
-            underscore: {
-              path: 'lib/underscore/underscore.js',
-              exports: '_'
-            },
-            handlebars: {
-              path: 'lib/handlebars/handlebars.js',
-              exports: 'Handlebars'
-            },
-            backbone: {
-              path: 'lib/backbone/backbone.js',
-              exports: 'Backbone',
-              depends: {
-                underscore: 'underscore'
-              }
-            },
-            'backbone.babysitter': {
-              path: 'lib/backbone.babysitter/lib/backbone.babysitter.js',
-              exports: 'Backbone.Babysitter',
-              depends: {
-                backbone: 'Backbone'
-              }
-            },
-            'backbone.wreqr': {
-              path: 'lib/backbone.wreqr/lib/backbone.wreqr.js',
-              exports: 'Backbone.Wreqr',
-              depends: {
-                backbone: 'Backbone'
-              }
-            },
-            'backbone.marionette': {
-              path: 'lib/backbone.marionette/lib/backbone.marionette.js',
-              exports: 'Marionette',
-              depends: {
-                jquery: '$',
-                backbone: 'Backbone',
-                underscore: '_'
-              }
-            }
-          }
+      lib: {
+        files: {
+          'www/dist/libs.js': ['www/lib/libs.js']
         },
-
-        src: ['app/main.js'],
-        dest: '_dist/js/built.js'
+        options: {
+          transform: ['browserify-shim'],
+          require: sharedModules
+        }
+      },
+      main: {
+        files: {
+          'www/dist/app.js': ['www/app/init.js']
+        },
+        options: {
+          transform: ['hbsfy'],
+          external: sharedModules
+        }
       }
-    }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          'www/dist/<%= pkg.name %>.min.js': ['www/dist/libs', 'www/dist/app.js']
+        }
+      }
+    },
+
+    karma: {
+      options: {
+        configFile: 'karma.conf.js'
+      },
+
+      continuous: {
+        singleRun: true,
+        browsers: [
+          'PhantomJS'
+        ]
+      },
+
+      dev: {
+        singleRun: true,
+        browsers: [
+          'PhantomJS'
+        ]
+      },
+
+      coverage: {
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          'app/**/*.js': ['coverage']
+        },
+        coverageReporter: {
+          type : 'html',
+          dir : 'coverage/'
+        }
+      }
+    },
 
   });
 
-  // Default task.
-  grunt.registerTask('default', 'lintblame');
+  require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('test', ['lintblame']);
-  grunt.registerTask('build', ['lintblame', 'karma', 'recess', 'copy', 'requirejs', 'comment_builder']);
-  grunt.registerTask('docs', 'groc');
+  // Default task.
+  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('build', ['jshint', 'browserify:app', 'uglify']);
+  grunt.registerTask('test', ['jshint', 'karma:dev']);
+
+  grunt.registerTask('serve', [
+    'connect:server',
+    'configureProxies:server',
+    'watch'
+  ]);
 
 };
