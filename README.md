@@ -1,11 +1,11 @@
-# Snug
+# Vertebrae
 
-A set of tools and conventions for building client-side applications with hoodie.js
+A set of tools and conventions for building client-side applications with Backbone.
 
 ### Installation
 
 ```bash
-hoodie new mysplendidhoodieapp -t "hoodiehq/snug"
+git clone https://github.com/svnlto/vertebrae
 ```
 
 ### Usage

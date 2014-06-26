@@ -7,7 +7,7 @@ var Controller = Marionette.Controller.extend({
     this.options = options || {};
 
     // create layout object passing in a template string
-    var Layout = Marionette.Layout.extend({
+    var Layout = Marionette.LayoutView.extend({
       template:  function () {
         return options.template;
       }

@@ -1,4 +1,3 @@
-/*jshint -W079 */
 var Marionette = require('marionette');
 var Backbone = require('backbone');
 

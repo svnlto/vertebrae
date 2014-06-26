@@ -1,7 +1,4 @@
-/*global Handlebars:true */
-
 var Handlebars = require('hbsfy/runtime');
-
 
 //
 // place {{ debug }}
@@ -22,3 +19,4 @@ Handlebars.registerHelper('debug', function (optionalValue) {
 });
 
 module.exports = Handlebars;
+

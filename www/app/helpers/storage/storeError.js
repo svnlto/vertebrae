@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var errors = function (e, jqXHR) {
+module.exports = function (e, jqXHR) {
 
   var statusCode = jqXHR.status + '';
   var errorObj = null;
@@ -15,6 +15,6 @@ var errors = function (e, jqXHR) {
   };
 
   (errors[statusCode] ? errors[statusCode] : errors['default'])();
+
 };
 
-module.exports = errors;

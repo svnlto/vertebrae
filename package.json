@@ -7,11 +7,11 @@
     "node": ">= 0.10.x"
   },
   "dependencies": {
-    "jquery": "~2.1.0",
-    "barf": "1.0.1",
-    "lodash": "~2.4.1",
     "backbone": "~1.1.2",
-    "backbone.marionette": "1.7.3"
+    "backbone.marionette": "^2.0.1",
+    "barf": "1.0.1",
+    "jquery": "~2.1.0",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -20,9 +20,6 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-uglify": "~0.3.2",
-    "karma": "~0.10.9",
-    "karma-phantomjs-launcher": "~0.1.1",
-    "karma-mocha": "~0.1.1",
     "mocha": "~1.17.1",
     "expect.js": "~0.2.0",
     "grunt-contrib-connect": "~0.6.0",
@@ -33,8 +30,7 @@
     "expect": "0.0.2",
     "load-grunt-tasks": "^0.4.0",
     "grunt-browserify": "^2.0.8",
-    "browserify-shim": "^3.5.0",
-    "karma-browserify": "^0.2.0"
+    "browserify-shim": "^3.5.0"
   },
   "scripts": {
     "test": "grunt test --verbose"
@@ -48,4 +44,3 @@
     "marionette": "./node_modules/backbone.marionette/lib/backbone.marionette.js"
   }
 }
-

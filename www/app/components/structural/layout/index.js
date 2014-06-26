@@ -1,8 +1,7 @@
-/*jshint -W079 */
 var Controller = require('./controllers/index');
 var app = require('../../../helpers/namespace');
 
-app.module('snug.layout', function () {
+app.module('app.layout', function () {
 
   this.addInitializer(function (options) {
     options.app.components.layout.template = require('./templates/index.hbs');
@@ -16,3 +15,4 @@ app.module('snug.layout', function () {
 });
 
 module.exports = app;
+
