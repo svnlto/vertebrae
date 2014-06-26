@@ -4170,7 +4170,7 @@ app.reqres.setHandler('config', function () {
   return new Config().toJSON();
 });
 
-app.on('initialize:before', function (options) {
+app.on('before:start', function (options) {
 
   // create router instance
   app.router = new Router();
@@ -4189,7 +4189,7 @@ app.on('initialize:before', function (options) {
 
 });
 
-app.on('initialize:after', function () {
+app.on('start', function () {
 
   // start router
   if (Backbone.history) {
