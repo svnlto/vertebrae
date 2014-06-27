@@ -1,12 +1,6 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"marionette":[function(require,module,exports){
 module.exports=require('zIkc0/');
 },{}],"zIkc0/":[function(require,module,exports){
-(function (global){
-
-; lodash = global.lodash = require("/Users/svenlito/Projects/vertebrae/node_modules/lodash/dist/lodash.js");
-jQuery = global.jQuery = require("/Users/svenlito/Projects/vertebrae/node_modules/jquery/dist/jquery.js");
-Backbone = global.Backbone = require("/Users/svenlito/Projects/vertebrae/node_modules/backbone/backbone.js");
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.0.1
@@ -33,8 +27,8 @@ Backbone = global.Backbone = require("/Users/svenlito/Projects/vertebrae/node_mo
       return (root.Marionette = factory(root, Backbone, _));
     });
   } else if (typeof exports !== 'undefined') {
-    var Backbone = __browserify_shim_require__('backbone');
-    var _ = __browserify_shim_require__('underscore');
+    var Backbone = require('backbone');
+    var _ = require('underscore');
     module.exports = factory(root, Backbone, _);
   } else {
     root.Marionette = factory(root, root.Backbone, root._);
@@ -3262,19 +3256,9 @@ Backbone = global.Backbone = require("/Users/svenlito/Projects/vertebrae/node_mo
   return Marionette;
 }));
 
-; browserify_shim__define__module__export__(typeof Marionette != "undefined" ? Marionette : window.Marionette);
-
-}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/Users/svenlito/Projects/vertebrae/node_modules/backbone/backbone.js":"5kFNoY","/Users/svenlito/Projects/vertebrae/node_modules/jquery/dist/jquery.js":"HlZQrA","/Users/svenlito/Projects/vertebrae/node_modules/lodash/dist/lodash.js":"K2RcUv"}],"backbone":[function(require,module,exports){
+},{"backbone":"5kFNoY","underscore":"eB62CW"}],"backbone":[function(require,module,exports){
 module.exports=require('5kFNoY');
 },{}],"5kFNoY":[function(require,module,exports){
-(function (global){
-
-; lodash = global.lodash = require("/Users/svenlito/Projects/vertebrae/node_modules/lodash/dist/lodash.js");
-jQuery = global.jQuery = require("/Users/svenlito/Projects/vertebrae/node_modules/jquery/dist/jquery.js");
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3294,7 +3278,7 @@ jQuery = global.jQuery = require("/Users/svenlito/Projects/vertebrae/node_module
 
   // Next for Node.js or CommonJS. jQuery may not be needed as a module.
   } else if (typeof exports !== 'undefined') {
-    var _ = __browserify_shim_require__('underscore');
+    var _ = require('underscore');
     factory(root, exports, _);
 
   // Finally, as a browser global.
@@ -4884,14 +4868,7 @@ jQuery = global.jQuery = require("/Users/svenlito/Projects/vertebrae/node_module
 
 }));
 
-; browserify_shim__define__module__export__(typeof Backbone != "undefined" ? Backbone : window.Backbone);
-
-}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"/Users/svenlito/Projects/vertebrae/node_modules/jquery/dist/jquery.js":"HlZQrA","/Users/svenlito/Projects/vertebrae/node_modules/lodash/dist/lodash.js":"K2RcUv"}],"HlZQrA":[function(require,module,exports){
-(function (global){
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
+},{"underscore":"eB62CW"}],"HlZQrA":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -14083,18 +14060,12 @@ return jQuery;
 
 }));
 
-; browserify_shim__define__module__export__(typeof $ != "undefined" ? $ : window.$);
-
-}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"jquery":[function(require,module,exports){
 module.exports=require('HlZQrA');
 },{}],"underscore":[function(require,module,exports){
 module.exports=require('eB62CW');
 },{}],"eB62CW":[function(require,module,exports){
 (function (global){
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /**
  * @license
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -21253,14 +21224,9 @@ module.exports=require('eB62CW');
   }
 }.call(this));
 
-; browserify_shim__define__module__export__(typeof _ != "undefined" ? _ : window._);
-
-}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"K2RcUv":[function(require,module,exports){
 (function (global){
-;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /**
  * @license
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
@@ -28047,11 +28013,17 @@ module.exports=require('eB62CW');
   }
 }.call(this));
 
-; browserify_shim__define__module__export__(typeof _ != "undefined" ? _ : window._);
-
-}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
-
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"lodash":[function(require,module,exports){
 module.exports=require('K2RcUv');
-},{}]},{},[]);
+},{}],11:[function(require,module,exports){
+require('lodash');
+require('underscore');
+
+var Backbone = require('backbone');
+Backbone.$ = require('jquery');
+Backbone.Marionette = require('marionette');
+
+
+
+},{"backbone":"5kFNoY","jquery":"HlZQrA","lodash":"K2RcUv","marionette":"zIkc0/","underscore":"eB62CW"}]},{},[11])

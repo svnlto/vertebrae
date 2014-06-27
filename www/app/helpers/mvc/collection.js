@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 
-var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
+module.exports = Backbone.Collection.extend({
 
   next: function (model) {
     return this.at((this.indexOf(model) + 1) % _.size(this));
@@ -14,4 +14,3 @@ var SuperCollection = Backbone.SuperCollection = Backbone.Collection.extend({
 
 });
 
-module.exports = SuperCollection;

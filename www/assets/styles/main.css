@@ -1,0 +1,7 @@
+
+/** Larger Screens - desktops and tablets **/
+@media all and (min-device-width: 1200px) {
+}
+
+@media all and (min-device-width: 1200px) and (max-width: 800px) {
+}

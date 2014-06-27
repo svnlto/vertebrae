@@ -11,29 +11,50 @@
     "backbone.marionette": "^2.0.1",
     "barf": "1.0.1",
     "jquery": "~2.1.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "underscore": "^1.6.0",
+    "vinyl-source-stream": "^0.1.1"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-karma": "~0.6.2",
-    "grunt-concurrent": "~0.4.3",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-uglify": "~0.3.2",
-    "mocha": "~1.17.1",
+    "browser-sync": "^1.0.0",
+    "browserify-shim": "^3.5.0",
+    "del": "^0.1.0",
+    "expect": "0.0.2",
     "expect.js": "~0.2.0",
-    "grunt-contrib-connect": "~0.6.0",
-    "grunt-connect-proxy": "~0.1.8",
-    "sinon": "~1.8.2",
+    "gulp": "^3.6.0",
+    "gulp-autoprefixer": "^0.0.7",
+    "gulp-cache": "^0.2.0",
+    "gulp-csso": "^0.2.6",
+    "gulp-flatten": "^0.0.2",
+    "gulp-if": "^1.2.1",
+    "gulp-imagemin": "^0.6.0",
+    "gulp-jshint": "^1.5.3",
+    "gulp-load-plugins": "^0.5.0",
+    "gulp-minify-html": "^0.1.3",
+    "gulp-replace": "^0.3.0",
+    "gulp-ruby-sass": "^0.5.0",
+    "gulp-size": "^0.4.0",
+    "gulp-uglify": "^0.3.0",
+    "gulp-uncss": "^0.4.4",
+    "gulp-useref": "^0.4.3",
+    "gulp-util": "^2.2.19",
     "handlebars": "~1.3.0",
     "hbsfy": "~1.3.2",
-    "expect": "0.0.2",
-    "load-grunt-tasks": "^0.4.0",
-    "grunt-browserify": "^2.0.8",
-    "browserify-shim": "^3.5.0"
+    "jshint-stylish": "^0.2.0",
+    "mocha": "~1.17.1",
+    "opn": "^0.1.1",
+    "psi": "^0.0.4",
+    "run-sequence": "^0.3.6",
+    "sinon": "~1.8.2"
   },
   "scripts": {
     "test": "grunt test --verbose"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim",
+      "hbsfy"
+    ]
   },
   "browserify-shim": "./config/shims.js",
   "browser": {

@@ -1,6 +1,7 @@
+var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
-var Controller = Marionette.Controller.extend({
+module.exports = Marionette.Controller.extend({
 
   initialize: function (options) {
 
@@ -25,4 +26,3 @@ var Controller = Marionette.Controller.extend({
 
 });
 
-module.exports = Controller;

@@ -1,3 +1,4 @@
+var Backbone = require('backbone');
 require('barf');
 
 var BaseRouter = Backbone.Router.extend({
