@@ -1,12 +1,15 @@
-var gutil = require('gulp-util');
+var shims = require('./config/shims');
+var sharedModules = Object.keys(shims).concat([
+  // place all modules you want in the lib build here
+  'barf'
+]);
 
-// Include Gulp & Tools We'll Use
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var pagespeed = require('psi');
 var reload = browserSync.reload;
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
@@ -20,41 +23,29 @@ gulp.task('jshint', function () {
     .pipe(reload({stream: true}));
 });
 
-gulp.task('browserify-lib', function() {
+gulp.task('browserify:lib', function() {
   var bundleStream = browserify('./www/lib/libs.js');
 
   return bundleStream
-    .require('jquery')
-    .require('lodash')
-    .require('underscore')
-    .require('backbone')
-    .require('marionette')
+    .require(sharedModules)
     .bundle()
     .pipe(source('libs.js'))
     .pipe(gulp.dest('./www/dist/js'))
     .on('error', gutil.log);
 });
 
-gulp.task('browserify-app', function() {
+gulp.task('browserify:app', function() {
   var bundleStream = browserify('./www/app/init.js');
 
   return bundleStream
-    .external('jquery')
-    .external('lodash')
-    .external('underscore')
-    .external('backbone')
-    .external('marionette')
+    .external(sharedModules)
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./www/dist/js'))
     .on('error', gutil.log);
 });
 
-// Build Production Files, the Default Task
-gulp.task('browserify', function (cb) {
-  runSequence(['browserify-lib', 'browserify-app'], cb);
-});
-
+gulp.task('browserify', ['browserify:lib', 'browserify:app']);
 
 // Optimize Images
 gulp.task('images', function () {
@@ -79,7 +70,7 @@ gulp.task('styles:css', function () {
 
 // Compile Any Other Sass Files You Added (app/styles)
 gulp.task('styles:scss', function () {
-  return gulp.src(['app/styles/**/*.scss', '!app/styles/components/components.scss'])
+  return gulp.src(['app/styles/**/*.scss'])
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
@@ -95,10 +86,12 @@ gulp.task('styles', ['styles:scss', 'styles:css']);
 
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
-  return gulp.src('www/**/*.html')
-    .pipe($.useref.assets({searchPath: '{.tmp, www/app, assets}'}))
+  return gulp.src('./www/*.html')
+    .pipe($.useref.assets({
+      searchPath: ['.tmp', 'www']
+    }))
     // Concatenate And Minify JavaScript
-    .pipe($.if('*.js', $.uglify()))
+    //.pipe($.if('*.js', $.uglify()))
     // Concatenate And Minify Styles
     .pipe($.if('*.css', $.csso()))
     // Remove Any Unused CSS
@@ -132,17 +125,6 @@ gulp.task('serve', function () {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images'], cb);
+  runSequence('styles', 'browserify', ['jshint', 'html', 'images'], cb);
 });
-
-// Run PageSpeed Insights
-// Update `url` below to the public URL for your site
-gulp.task('pagespeed', pagespeed.bind(null, {
-  // By default, we use the PageSpeed Insights
-  // free (no API key) tier. You can use a Google
-  // Developer API key if you have one. See
-  // http://goo.gl/RkN0vE for info key: 'YOUR_API_KEY'
-  url: 'https://example.com',
-  strategy: 'mobile'
-}));
 

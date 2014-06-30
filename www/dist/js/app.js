@@ -4773,106 +4773,6 @@
 }).call(this);
 
 },{}],5:[function(require,module,exports){
-'use strict';
-
-var _ = require('underscore');
-var Backbone = require('backbone');
-
-_.extend(Backbone.Router.prototype, {
-
-  /**
-   * Override default route fn to call before/after filters
-   *
-   * @param {String} route
-   * @param {String} name
-   * @param {Function} [callback]
-   * @return {*}
-   */
-  route: function (route, name, callback) {
-
-    if (!_.isRegExp(route)) {
-      route = this._routeToRegExp(route);
-    }
-
-    if (_.isFunction(name)) {
-      callback = name;
-      name = '';
-    }
-
-    if (!callback) {
-      callback = this[name];
-    }
-
-    var router = this;
-
-    // store all the before and after routes in a stack
-    var beforeStack = [];
-    var afterStack = [];
-
-    _.each(router.before, function (value, key) {
-      beforeStack.push({
-        'filter': key,
-        'filterFn': value
-      });
-    });
-
-    _.each(router.after, function (value, key) {
-      afterStack.push({
-        'filter': key,
-        'filterFn': value
-      });
-    });
-
-    Backbone.history.route(route, function (fragment) {
-      var args = router._extractParameters(route, fragment);
-
-      var beforeStackClone = _.clone(beforeStack);
-      var afterStackClone = _.clone(afterStack);
-
-      function next(stack, runRoute) {
-        var layer = stack.shift();
-
-        if (layer) {
-          var filter = _.isRegExp(layer.filter) ? layer.filter : router._routeToRegExp(layer.filter);
-
-          if (filter.test(fragment)) {
-            var fn = _.isFunction(layer.filterFn) ? layer.filterFn : router[layer.filterFn];
-
-            fn.apply(router, [
-                fragment,
-                args,
-                function () {
-                  next(stack, runRoute);
-                }
-              ]);
-          } else {
-            next(stack, runRoute);
-          }
-        } else if (runRoute) {
-          callback.apply(router, args);
-        }
-      }
-
-      // start with top of the before stack
-      next(beforeStackClone, true);
-
-      router.trigger.apply(router, ['route:' + name].concat(args));
-      router.trigger('route', name, args);
-
-      Backbone.history.trigger('route', router, name, args);
-
-      next(afterStackClone);
-
-    });
-
-    return this;
-  }
-
-});
-
-module.exports = Backbone;
-
-},{"backbone":"5kFNoY","underscore":14}],6:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -4905,7 +4805,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":7,"./handlebars/exception":8,"./handlebars/runtime":9,"./handlebars/safe-string":10,"./handlebars/utils":11}],7:[function(require,module,exports){
+},{"./handlebars/base":6,"./handlebars/exception":7,"./handlebars/runtime":8,"./handlebars/safe-string":9,"./handlebars/utils":10}],6:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -5086,7 +4986,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":8,"./utils":11}],8:[function(require,module,exports){
+},{"./exception":7,"./utils":10}],7:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -5115,7 +5015,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -5253,7 +5153,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":7,"./exception":8,"./utils":11}],10:[function(require,module,exports){
+},{"./base":6,"./exception":7,"./utils":10}],9:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -5265,7 +5165,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -5342,17 +5242,15 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":10}],12:[function(require,module,exports){
+},{"./safe-string":9}],11:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":6}],13:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":5}],12:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":12}],14:[function(require,module,exports){
-module.exports=require(4)
-},{}],15:[function(require,module,exports){
+},{"handlebars/runtime":11}],13:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 var Controller = Marionette.Controller.extend({
@@ -5366,7 +5264,7 @@ var Controller = Marionette.Controller.extend({
 module.exports = Controller;
 
 
-},{"backbone.marionette":1}],16:[function(require,module,exports){
+},{"backbone.marionette":1}],14:[function(require,module,exports){
 var app = require('../../helpers/namespace');
 var Controller = require('./controllers/index');
 
@@ -5383,7 +5281,7 @@ app.module('app', function () {
 module.exports = app;
 
 
-},{"../../helpers/namespace":23,"./controllers/index":15}],17:[function(require,module,exports){
+},{"../../helpers/namespace":21,"./controllers/index":13}],15:[function(require,module,exports){
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
@@ -5413,7 +5311,7 @@ module.exports = Marionette.Controller.extend({
 });
 
 
-},{"backbone":"5kFNoY","backbone.marionette":1}],18:[function(require,module,exports){
+},{"backbone":"5kFNoY","backbone.marionette":1}],16:[function(require,module,exports){
 var Controller = require('./controllers/index');
 var app = require('../../../helpers/namespace');
 
@@ -5433,7 +5331,7 @@ app.module('app.layout', function () {
 module.exports = app;
 
 
-},{"../../../helpers/namespace":23,"./controllers/index":17,"./templates/index.hbs":19}],19:[function(require,module,exports){
+},{"../../../helpers/namespace":21,"./controllers/index":15,"./templates/index.hbs":17}],17:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -5445,7 +5343,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<aside> </aside>\n<section> </section>\n";
   });
 
-},{"hbsfy/runtime":13}],20:[function(require,module,exports){
+},{"hbsfy/runtime":12}],18:[function(require,module,exports){
 var Handlebars = require('hbsfy/runtime');
 
 //
@@ -5469,7 +5367,7 @@ Handlebars.registerHelper('debug', function (optionalValue) {
 module.exports = Handlebars;
 
 
-},{"hbsfy/runtime":13}],21:[function(require,module,exports){
+},{"hbsfy/runtime":12}],19:[function(require,module,exports){
 /*jshint -W079, -W098 */
 var $ = require('jquery');
 var Backbone = require('backbone');
@@ -5478,7 +5376,7 @@ var SuperModel = Backbone.Model.extend();
 
 module.exports = SuperModel;
 
-},{"backbone":"5kFNoY","jquery":"HlZQrA"}],22:[function(require,module,exports){
+},{"backbone":"5kFNoY","jquery":"HlZQrA"}],20:[function(require,module,exports){
 var Backbone = require('backbone');
 require('barf');
 
@@ -5501,7 +5399,7 @@ var BaseRouter = Backbone.Router.extend({
 module.exports = BaseRouter;
 
 
-},{"backbone":"5kFNoY","barf":5}],23:[function(require,module,exports){
+},{"backbone":"5kFNoY","barf":"Fc9RwY"}],21:[function(require,module,exports){
 (function (global){
 var Marionette = require('marionette');
 var Backbone = require('backbone');
@@ -5550,7 +5448,7 @@ module.exports = app;
 
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../models/config":28,"../router":29,"backbone":"5kFNoY","marionette":"zIkc0/"}],24:[function(require,module,exports){
+},{"../models/config":26,"../router":27,"backbone":"5kFNoY","marionette":"zIkc0/"}],22:[function(require,module,exports){
 (function (global){
 var storeError = require('./storeError');
 var storeSuccess = require('./storeSuccess');
@@ -5582,7 +5480,7 @@ app.addInitializer(function (config) {
 module.exports = app;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../namespace":23,"./storeError":25,"./storeSuccess":26,"jquery":"HlZQrA"}],25:[function(require,module,exports){
+},{"../namespace":21,"./storeError":23,"./storeSuccess":24,"jquery":"HlZQrA"}],23:[function(require,module,exports){
 var $ = require('jquery');
 
 module.exports = function (e, jqXHR) {
@@ -5604,7 +5502,7 @@ module.exports = function (e, jqXHR) {
 };
 
 
-},{"jquery":"HlZQrA"}],26:[function(require,module,exports){
+},{"jquery":"HlZQrA"}],24:[function(require,module,exports){
 module.exports = function (e, jqXHR, opts, res) {
 
   var statusCode = jqXHR.status + '';
@@ -5620,7 +5518,7 @@ module.exports = function (e, jqXHR, opts, res) {
 };
 
 
-},{}],27:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 var Config = require('./models/config');
 var app = require('./helpers/namespace');
 
@@ -5640,7 +5538,7 @@ app.start(new Config().toJSON());
 module.exports = app;
 
 
-},{"./components/app/index":16,"./components/structural/layout/index":18,"./helpers/handlebars":20,"./helpers/namespace":23,"./helpers/storage/store":24,"./models/config":28}],28:[function(require,module,exports){
+},{"./components/app/index":14,"./components/structural/layout/index":16,"./helpers/handlebars":18,"./helpers/namespace":21,"./helpers/storage/store":22,"./models/config":26}],26:[function(require,module,exports){
 var BaseModel = require('../helpers/mvc/model');
 
 var Model = BaseModel.extend({
@@ -5676,7 +5574,7 @@ var Model = BaseModel.extend({
 module.exports = Model;
 
 
-},{"../helpers/mvc/model":21}],29:[function(require,module,exports){
+},{"../helpers/mvc/model":19}],27:[function(require,module,exports){
 var BaseRouter = require('./helpers/mvc/router');
 
 var Router = BaseRouter.extend({
@@ -5695,4 +5593,4 @@ var Router = BaseRouter.extend({
 module.exports = Router;
 
 
-},{"./helpers/mvc/router":22}]},{},[27])
+},{"./helpers/mvc/router":20}]},{},[25])

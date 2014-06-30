@@ -4868,7 +4868,109 @@ module.exports=require('5kFNoY');
 
 }));
 
-},{"underscore":"eB62CW"}],"HlZQrA":[function(require,module,exports){
+},{"underscore":"eB62CW"}],"Fc9RwY":[function(require,module,exports){
+'use strict';
+
+var _ = require('underscore');
+var Backbone = require('backbone');
+
+_.extend(Backbone.Router.prototype, {
+
+  /**
+   * Override default route fn to call before/after filters
+   *
+   * @param {String} route
+   * @param {String} name
+   * @param {Function} [callback]
+   * @return {*}
+   */
+  route: function (route, name, callback) {
+
+    if (!_.isRegExp(route)) {
+      route = this._routeToRegExp(route);
+    }
+
+    if (_.isFunction(name)) {
+      callback = name;
+      name = '';
+    }
+
+    if (!callback) {
+      callback = this[name];
+    }
+
+    var router = this;
+
+    // store all the before and after routes in a stack
+    var beforeStack = [];
+    var afterStack = [];
+
+    _.each(router.before, function (value, key) {
+      beforeStack.push({
+        'filter': key,
+        'filterFn': value
+      });
+    });
+
+    _.each(router.after, function (value, key) {
+      afterStack.push({
+        'filter': key,
+        'filterFn': value
+      });
+    });
+
+    Backbone.history.route(route, function (fragment) {
+      var args = router._extractParameters(route, fragment);
+
+      var beforeStackClone = _.clone(beforeStack);
+      var afterStackClone = _.clone(afterStack);
+
+      function next(stack, runRoute) {
+        var layer = stack.shift();
+
+        if (layer) {
+          var filter = _.isRegExp(layer.filter) ? layer.filter : router._routeToRegExp(layer.filter);
+
+          if (filter.test(fragment)) {
+            var fn = _.isFunction(layer.filterFn) ? layer.filterFn : router[layer.filterFn];
+
+            fn.apply(router, [
+                fragment,
+                args,
+                function () {
+                  next(stack, runRoute);
+                }
+              ]);
+          } else {
+            next(stack, runRoute);
+          }
+        } else if (runRoute) {
+          callback.apply(router, args);
+        }
+      }
+
+      // start with top of the before stack
+      next(beforeStackClone, true);
+
+      router.trigger.apply(router, ['route:' + name].concat(args));
+      router.trigger('route', name, args);
+
+      Backbone.history.trigger('route', router, name, args);
+
+      next(afterStackClone);
+
+    });
+
+    return this;
+  }
+
+});
+
+module.exports = Backbone;
+
+},{"backbone":"5kFNoY","underscore":"eB62CW"}],"barf":[function(require,module,exports){
+module.exports=require('Fc9RwY');
+},{}],"HlZQrA":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -28016,8 +28118,9 @@ module.exports=require('eB62CW');
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],"lodash":[function(require,module,exports){
 module.exports=require('K2RcUv');
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 require('lodash');
+require('barf');
 require('underscore');
 
 var Backbone = require('backbone');
@@ -28026,4 +28129,4 @@ Backbone.Marionette = require('marionette');
 
 
 
-},{"backbone":"5kFNoY","jquery":"HlZQrA","lodash":"K2RcUv","marionette":"zIkc0/","underscore":"eB62CW"}]},{},[11])
+},{"backbone":"5kFNoY","barf":"Fc9RwY","jquery":"HlZQrA","lodash":"K2RcUv","marionette":"zIkc0/","underscore":"eB62CW"}]},{},[13])
