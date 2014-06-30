@@ -46,9 +46,6 @@
     "run-sequence": "^0.3.6",
     "sinon": "~1.8.2"
   },
-  "scripts": {
-    "test": "grunt test --verbose"
-  },
   "browserify": {
     "transform": [
       "browserify-shim",
