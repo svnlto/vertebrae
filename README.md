@@ -1,77 +1,69 @@
-# vertebrae
-
-[![Build Status](https://travis-ci.org/svnlto/vertebrae.png?branch=master)](https://travis-ci.org/svnlto/vertebrae)
-
-__yet another Backbone.Marionette Boilerplate__
-
-this is the sort of app structure I would usually start off a Backbone
-based project.
-
-### Prerequisites
-
-the readme assumes that you have NPM and Bower installed.
-
-## App Structure ##
-
-* `app` - holds the backbone app
-* `assets` - images and css
-* `bin` - bin files that start the projects webserver in different modes
-* `lib` - js libraries used by the backbone apps
-* `prod` - this is where stuff goes post build
-* `server` - the actual web server
-* `tests` - mocha / expect based unit tests
-* `Gruntfile.js`  - [grunt.js](http://gruntjs.com "grunt.js") grunt file ( look out for the watch and build task )
-* `karma.conf.js` - [karma](https://github.com/karma-runner/karma) config file
-
-## Usage ##
-
-Run the following commands from within the project directory
-
-`npm install`
-
-start node service
-
-`node bin/dev`
-
-point your browser to
-
-`http://localhost:4444`
-
-and start hacking.
-
-### Testing
-
-Running your unit tests is as easy as going to `http://localhost:4444/_tests`.
-
-### Build Process
-
-To get a minified version of your app. All you should have to do is run `grunt build`
-from within the project directory. This will generate a deployable version of your app right
-under: `/prod`
+# [Vertebrae](https://github.com/svnlto/vertebrae)
 
 
-### Changelog ###
+## Overview
 
-#### 0.2.1 / 2013-04-29
+A set of tools and conventions for building client-side applications with Backbone.
 
-  * [fix] refer to backbone.marionette.hbs by version number
-  * [fix] grunt copy css path
-  * [fix] r.js output
-  * adds lodash dependency
-  * bump engine version
-  * remove node 0.8 from travis build
-  * [revert] e3752ab307a7828e18a5f5044bf39fe66e90c7f0
-  * [minor] bump testem package version
-  * adds travis-ci build status image
-  * adding node 0.9 to build
-  * adds travis-ci config
-  * [refactor] rename site to app
-  * Merge branch 'master' of github.com:svnlto/vertebrae
-  * Update server.js
-  * Update store.js
-  * Update config.js
+## Tooling
+
+If you would like to use the optional tooling we provide, make sure your system has [Node.js](http://nodejs.org), [Ruby](https://www.ruby-lang.org/), [gulp.js](http://gulpjs.com) and [Sass](http://sass-lang.com/install) installed.
+
+### Node
+
+Let's check to see if you already have Node installed. Bring up a terminal and type `node --version`. If Node responds, and if it shows a version at or above v0.10.x, proceed to checking if you have Ruby installed too. If you require Node, go to [nodejs.org](http://nodejs.org/) and click on the big green Install button.
+
+### Ruby
+
+Bring up a terminal and type `ruby --version`. If Ruby responds, and if it shows a version number at or above 1.8.7 then type `gem --version`. If you don't see any errors, proceed to installing the Sass gem. If you require Ruby, it can be installed from the [Ruby downloads](https://www.ruby-lang.org/en/downloads/) page.
+
+### Sass
+
+Bring up a terminal and type `sass --version`. If Sass is installed it should return a version number at or above 3.3.x. If you don't see any errors, proceed to the Gulp installation. If you need to install Sass, see the command-line instructions on the [Sass installation](http://sass-lang.com/install) page.
+
+### Gulp
+
+Bring up a terminal and type `gulp --version`. If Gulp is installed it should return a version number at or above 3.5.x. If you don't see any errors, proceed to the Gulp commands section. If you need to install Gulp, open up a terminal and type in the following:
+
+```sh
+$ npm install --global gulp
+```
+
+This will install Gulp globally. Depending on your user account, you may need to gain elevated permissions using `sudo` (i.e `sudo npm install --global gulp`). Next, install the local dependencies Web Starter Kit requires:
+
+```sh
+$ npm install
+```
+
+That's it! You should now have everything needed to use the Gulp tools in Web Starter Kit.
+
+### Gulp Commands
+
+You can now use Gulp with the following commands to stay productive during development:
+
+#### Watch For Changes & Automatically Refresh Across Devices
+
+```sh
+$ gulp serve
+```
+
+This outputs an IP address you can use to locally test and another that can be used on devices connected to your network.
+
+### Build & Optimize
+
+```sh
+$ gulp
+```
+
+Build and optimize the current project, ready for deployment. This includes linting as well as image, script, stylesheet and HTML optimization and minification.
+
+## Inspiration
+
+Vertebrae is inspired by [Google Web Starter Kit](https://github.com/google/web-starter-kit/wiki/FAQ), [Mobile HTML5 Boilerplate](http://html5boilerplate.com/mobile/) and Yeoman's [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp).
+
+## License
+
+Apache 2.0
+Copyright 2014 Sven Lito
 
 
-#### Author: [Sven Lito](http://svenlito.com)
-
-#### License: MIT
